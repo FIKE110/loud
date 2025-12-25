@@ -401,7 +401,10 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
         ? await mockProcessPayment(formData, email)
         : await mockProcessPaymentAlready(formData, email);
       setStep('success');
-      window.open(url, '_blank');
+      setTimeout(()=>{
+         window.location.href=url
+      },300)
+
       // toast.success("Transaction Intialized");
     
     } catch (err) {
