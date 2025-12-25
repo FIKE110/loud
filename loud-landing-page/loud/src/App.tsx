@@ -403,6 +403,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
       setStep('success');
       setTimeout(()=>{
          window.location.href=url
+         
       },300)
 
       // toast.success("Transaction Intialized");
