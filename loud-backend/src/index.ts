@@ -9,7 +9,7 @@ const app = new Hono();
 
 const frontend_url=process.env.FRONTEND_URL || "http://localhost:5173"
 
-app.use(cors({origin:frontend_url}))
+app.use(cors())
 
 app.get('/', (c) => {
   return c.text('Hello Bun!');
