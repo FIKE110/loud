@@ -73,6 +73,8 @@ user.post("/register-and-pay", async (c) => {
       return c.json({ error: "Invalid package code" }, 400);
     }
 
+
+
     const paystackResponse = await fetch(
       "https://api.paystack.co/transaction/initialize",
       {
@@ -84,7 +86,7 @@ user.post("/register-and-pay", async (c) => {
         body: JSON.stringify({
           email,
           amount: usdToNaira(amount.launch_price) ,
-          callback_url: "http://localhost:5173/payment-success",
+          callback_url: `${process.env.FRONTEND_URL}/payment-success`,
           metadata: {
             package_code,
           },
