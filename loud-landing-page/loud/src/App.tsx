@@ -745,19 +745,19 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
 
           <Swiper
             onSwiper={onSwiper}
-            modules={[Pagination]}
+             navigation={true}
             spaceBetween={40}
             breakpoints={{
               320: {
-                slidesPerView: 1,
+                slidesPerView: 1.2,
                 spaceBetween: 20
               },
               768: {
-                slidesPerView: 2,
+                slidesPerView: 2.2,
                 spaceBetween: 30
               },
               1024: {
-                slidesPerView: 3,
+                slidesPerView: 3.2,
                 spaceBetween: 40
               }
             }}
