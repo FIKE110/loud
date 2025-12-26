@@ -8,8 +8,10 @@ import {
   Loader2,
   XCircle
 
+
 // Import Swiper styles
-} from 'lucide-react';
+} from 'lucide-react'; 
+import './App.css'
 import {toast, Toaster} from 'sonner'
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
@@ -91,7 +93,7 @@ const Navbar = () => {
           <div className="w-9 h-9 md:w-10 md:h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">
             L
           </div>
-          <span className={`text-xl md:text-2xl font-black tracking-tighter transition-colors ${isScrolled ? 'text-slate-900' : 'text-slate-900 md:text-white'}`}>
+          <span className={`text-xl md:text-2xl font-black tracking-tighter transition-colors ${isScrolled ? 'text-slate-900' : ' text-white'}`}>
             LOUD<span className="text-amber-500">!</span>
           </span>
         </a>
@@ -151,14 +153,14 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <div className="pt-10 flex flex-col gap-4">
+              {/* <div className="pt-10 flex flex-col gap-4">
                 <Button onClick={() => window.open('https://docs.google.com/forms/d/1iKlK5hbBVd7ShKb__WMHetwdke3iYpv_Jk2B_Tveo0M/edit', '_blank')}>
                   Pre-order Now
                 </Button>
                 <Button variant="whatsapp" onClick={() => window.open('https://whatsapp.com/channel/0029VbBPWHuLikg8UnhPvF1r', '_blank')}>
                   WhatsApp Channel
                 </Button>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         )}
