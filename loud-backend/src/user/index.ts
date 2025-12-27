@@ -24,10 +24,11 @@ user.get("/:email", async (c) => {
     const preorder = await findPreorderByUserId(user.id);
 
     if (preorder && preorder.status === 'PAID')
-      return c.json({
+       return c.json({
         status: true,
         preorder: true,
         message: "User has a preorder ,Check your email for future responses",
+        freemium:preorder.package_code==='FREEMIUM'
       });
 
     return c.json({
@@ -37,6 +38,54 @@ user.get("/:email", async (c) => {
     });
   } catch (e: any) {
     return c.json({ error: e.message });
+  }
+});
+
+user.post("/register-freemium", async (c) => {
+   try {
+    const body = schema.parse(await c.req.json());
+    const { first_name, last_name, email, gender, package_code } = body;
+
+    let user = await findUserByEmail(email);
+
+    if (!user) {
+      user = await saveUser({
+        first_name,
+        last_name,
+        email,
+        gender,
+
+      });
+    }
+
+    if (!user) {
+      return c.json({ error: "Failed to create or find user" }, 500);
+    }
+
+    const preorder = await findPreorderByUserId(user.id);
+
+    if (preorder && preorder.status === 'PAID') {
+      return c.json({ error: 'User already has a paid preorder' }, 400);
+    }
+
+    const amount = await findPackagePriceByPackageCode(package_code);
+
+    if (!amount) {
+      return c.json({ error: "Invalid package code" }, 400);
+    }
+
+
+    await savePreorder({
+        user_id: user.id,
+        package_code,
+        package_price: amount.launch_price,
+        status: 'PAID',
+        payment_reference: "freemium",
+      });
+
+    return c.json({message:"Successfully registered to freemium"});
+  } catch (error: any) {
+    return c.json({ error: error.message }, 500);
   }
 });
 

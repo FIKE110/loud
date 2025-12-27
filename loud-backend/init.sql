@@ -1,6 +1,6 @@
 -- 1️⃣ Enum types
 CREATE TYPE gender_enum AS ENUM ('male', 'female', 'rather not say');
-CREATE TYPE package_enum AS ENUM ('OFFER_1', 'OFFER_2', 'OFFER_3', 'OFFER_4');
+CREATE TYPE package_enum AS ENUM ('FREEMIUM','OFFER_1', 'OFFER_2', 'OFFER_3', 'OFFER_4');
 CREATE TYPE currency_enum AS ENUM ('USD', 'NGN');
 CREATE TYPE preorder_status_enum AS ENUM ('PENDING', 'PAID', 'REFUNDED', 'CANCELLED');
 
@@ -41,6 +41,7 @@ CREATE TABLE user_preorders (
 );
 -- 5️⃣ Insert initial package data
 INSERT INTO packages (code, name, description, launch_price) VALUES
+('FREEMIUM', 'Free', 'Free', 0),
 ('OFFER_1', '$6.7/12mnth $6.7/M after launch', 'Basic features for personal use', 80.40),
 ('OFFER_2', '$30/12mnth $30/M after launch', 'Advanced features for professionals', 360.00),
 ('OFFER_3', '$3.5/12mnths $3.5/M after launch', 'Comprehensive features for businesses', 42.00),

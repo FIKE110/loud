@@ -26,7 +26,7 @@ paystack.post('/initialize', async (c) => {
 
     const preorder = await findPreorderByUserId(user.id);
 
-    if (preorder && preorder.status === 'PAID') {
+    if (preorder && preorder.status === 'PAID' && preorder.package_code!='FREEMIUM') {
       return c.json({ error: 'User already has a paid preorder' }, 400);
     }
   

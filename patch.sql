@@ -5,7 +5,7 @@ BEGIN
   END IF;
 
   IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'package_enum') THEN
-    CREATE TYPE package_enum AS ENUM ('OFFER_1', 'OFFER_2', 'OFFER_3', 'OFFER_4');
+    CREATE TYPE package_enum AS ENUM ('FREEMIUM','OFFER_1', 'OFFER_2', 'OFFER_3', 'OFFER_4');
   END IF;
 
   IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'currency_enum') THEN
@@ -50,9 +50,10 @@ CREATE TABLE IF NOT EXISTS user_preorders (
 
 INSERT INTO packages (code, name, description, launch_price)
 VALUES
+('FREEMIUM', 'Free', 'Free', 0),
   ('OFFER_1', '$6.7/12mnth $6.7/M after launch', 'Basic features for personal use', 8040),
   ('OFFER_2', '$30/12mnth $30/M after launch', 'Advanced features for professionals', 36000),
   ('OFFER_3', '$3.5/12mnths $3.5/M after launch', 'Comprehensive features for businesses', 4200),
-  ('OFFER_4', '$62.9/12mths $62.9/M after launch', 'All features for large enterprises', 75480)
+('OFFER_4', '$62.9/12mths $62.9/M after launch', 'All features for large enterprises', 75480)
 ON CONFLICT (code) DO NOTHING;
 

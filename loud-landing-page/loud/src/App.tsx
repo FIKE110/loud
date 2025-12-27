@@ -269,17 +269,17 @@ type ProfileStatus = 'NO_PROFILE' | 'PROFILE_NO_PREORDER' | 'PROFILE_WITH_PREORD
   }
 
   const data = await response.json();
-  const { status,preorder } = data;
+  const { status,preorder ,freemium} = data;
 
   if(data.error){
     throw new Error(data.error);
   }
   return new Promise((resolve) => {
 
-      if (status && preorder) {
+      if (status && preorder && !freemium) {
         resolve({ status: 'PROFILE_WITH_PREORDER', message: 'User has a preorder.' });
-      } else if (status) {
-        resolve({ status: 'PROFILE_NO_PREORDER' });
+      } else if (status || freemium) {
+        resolve({ status: 'PROFILE_NO_PREORDER',message:freemium ? 'true' : 'false'});
       } else {
         resolve({ status: 'NO_PROFILE' });
       }
@@ -327,6 +327,28 @@ const mockProcessPayment = async (formData:{
   return authorization_url;
 };
 
+const mockProcessFreemium = async (formData:{
+    first_name: string;
+    last_name: string;
+    gender: string;
+    package_code: string;
+},email:string): Promise<string> => {
+  const response=await fetch(`${backend_url}/api/user/register-freemium`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ...formData,email }),
+  });
+
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  const {message} = await response.json();
+  return message;
+};
+
 const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onClose: () => void; currentStep?: 'email' | 'details' | 'payment' | 'success' }) => {
   const [step, setStep] = useState<'email' | 'details' | 'payment' | 'success'>('email');
   const [loading, setLoading] = useState(false);
@@ -337,7 +359,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
     first_name: '',
     last_name: '',
     gender: 'rather not say',
-    package_code: 'OFFER_1'
+    package_code: 'FREEMIUM'
   });
 
   const [isNewUser, setIsNewUser] = useState(true);
@@ -348,7 +370,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
       setStep('email');
       setIsNewUser(true);
       setEmail('');
-      setFormData({ first_name: '', last_name: '', gender: 'rather not say', package_code: 'OFFER_1' });
+      setFormData({ first_name: '', last_name: '', gender: 'rather not say', package_code: 'FREEMIUM' });
       setLoading(false);
     }
   }, [isOpen]);
@@ -373,6 +395,9 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
       } else if (result.status === 'PROFILE_NO_PREORDER') {
         setStep('details');
         setIsNewUser(false) // But in render logic, we'll only show package field
+        result.message==='true' ?
+          toast.success("You are already on the freemium")
+        :
         toast.success("Welcome back! Please select your package.");
       } else {
         setStep('details');
@@ -392,8 +417,24 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
       setIsNewUser(false) 
     }
 
-    setStep('payment');
-    handlePayment(isNewUser);
+    if (formData.package_code === 'FREEMIUM') {
+      handleFreemiumRegistration(isNewUser);
+    } else {
+      setStep('payment');
+      handlePayment(isNewUser);
+    }
+  };
+
+  const handleFreemiumRegistration = async (isNewUser: boolean) => {
+    try {
+      const message = await mockProcessFreemium(formData, email)
+      setStep('success');
+      toast.success(message);
+    
+    } catch (err) {
+      setStep('details');
+      toast.error("Freemium registration failed. Please try again.");
+    }
   };
 
   const handlePayment = async (isNewUser: boolean) => {
@@ -515,9 +556,10 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Select Package</label>
                     <div className="grid grid-cols-1 gap-3">
                       {[
-                        { code: 'OFFER_1', name: 'Offer 1 ($80.4)' },
-                        { code: 'OFFER_2', name: 'Offer 2 ($360.0)' },
-                        { code: 'OFFER_3', name: 'Offer 3 ($42.0)' },
+                        { code: 'FREEMIUM', name: 'Freemium ($0)' },
+                        { code: 'OFFER_1', name: 'Offer 1 ($80.40)' },
+                        { code: 'OFFER_2', name: 'Offer 2 ($360.00)' },
+                        { code: 'OFFER_3', name: 'Offer 3 ($42.00)' },
                         { code: 'OFFER_4', name: 'Offer 4 ($754.80)' }
                       ].map((pkg) => (
                         <label 
@@ -545,7 +587,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                   </div>
 
                   <Button className="w-full mt-6">
-                    Proceed to Payment
+                    {formData.package_code === 'FREEMIUM' ? 'Subscribe' : 'Proceed to Payment'}
                   </Button>
                 </form>
               )}
@@ -567,9 +609,14 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                   <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
                     <Check size={40} />
                   </div>
-                  <h3 className="text-2xl font-black text-slate-900 mb-2">Pre-order Payment initialized</h3>
+                  <h3 className="text-2xl font-black text-slate-900 mb-2">
+                    {formData.package_code === 'FREEMIUM' ? 'Subscription Successful!' : 'Pre-order Payment initialized'}
+                  </h3>
                   <p className="text-slate-500 mb-8 max-w-xs mx-auto">
-                    We'll send a confirmation email to <span className="font-bold text-slate-900">{email}</span> after payment.
+                    {formData.package_code === 'FREEMIUM' 
+                      ? `You have successfully subscribed to the Freemium plan. We'll send a confirmation email to ${email}.`
+                      : `We'll send a confirmation email to ${email} after payment.`
+                    }
                   </p>
                   <Button variant="outline" className="text-indigo-600 border-indigo-200 hover:bg-indigo-50 w-full" onClick={onClose}>
                     Close
@@ -638,29 +685,28 @@ const Features = () => {
 };
 
 
-const offers=[{
-  name:"OFFER_1",
-  price:80.4,
-  PriceDetails:"$6.7/12mnth $6.7/M after launch",
-},{
-  name:"OFFER_2",
-  price:360,
-  PriceDetails:"$30/12mnth $30/M after launch",
-},{
-  name:"OFFER_3",
-  price:42.0,
-  PriceDetails:"$3.5/12mnths $3.5/M after launch",
-},{
-  name:"OFFER_4",
-  price:754.8,
-  PriceDetails:"$62.9/12mths $62.9/M after launch",
-}]
+
 
 const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
   const plans = [
     {
-      name: "Offer 1",
-      price: "80.4",
+      name: "FREEMIUM",
+      price: "0",
+      priceDetails: "Lifetime Free Access",
+      description: "Connect with family and friends, share updates, and more.",
+      features: [
+        "Connect with family and friends",
+        "Share update/posts",
+        "Comment and share gifts with friends",
+        "Experience global birthday mate event on feed",
+        "Monetize @500 followers and earn 50% UGC revenue",
+      ],
+      buttonVariant: "priceOutline",
+      highlight: false,
+    },
+    {
+      name: "OFFER 1",
+      price: "80.40",
       priceDetails: "$6.7/12mnth $6.7/M after launch",
       description: "Save 50% subscription amount for Life. 100% money back if you didn’t find your proposed value.",
       features: [
@@ -672,11 +718,11 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
         "Instant verification from launch day",
         "Bid submission, reminders and contract award",
       ],
-      buttonVariant: "priceOutline",
-      highlight: false,
+      buttonVariant: "primary",
+      highlight: true,
     },
     {
-      name: "Offer 2",
+      name: "OFFER 2",
       price: "360",
       priceDetails: "$360/12mnth $30/m after launch",
       description: "Save 50% subscription amount for Life. 100% money back if you didn’t find your proposed value.",
@@ -689,12 +735,12 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
         "Instant verification from launch day",
         "Bid submission, reminders and search optimization, AI project assist and contract award",
       ],
-      buttonVariant: "primary",
-      highlight: true,
+      buttonVariant: "priceOutline",
+      highlight: false,
     },
     {
-      name: "Offer 3",
-      price: "42.0",
+      name: "OFFER 3",
+      price: "42",
       priceDetails: "$3.5/12mnths $3.5/M after launch",
       description: "Save 50% subscription amount for Life. Only 100 slots available.",
       features: [
@@ -705,12 +751,12 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
         "Instant verification from launch day",
         "Direct community access and support",
       ],
-      buttonVariant: "priceOutline",
-      highlight: false,
+      buttonVariant: "primary",
+      highlight: true,
     },
     {
-      name: "Offer 4",
-      price: "754.8",
+      name: "OFFER 4",
+      price: "754.80",
       priceDetails: "$62.9/12mths $62.9/M after launch",
       description: "Save 50% subscription amount for Life. Only 100 slots available.",
       features: [
@@ -721,8 +767,8 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
         "Instant verification from launch day",
         "Access to all premium features",
       ],
-      buttonVariant: "primary",
-      highlight: true,
+      buttonVariant: "priceOutline",
+      highlight: false,
     },
   ];
 
@@ -811,9 +857,9 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
                 variant={plan.buttonVariant} 
                 className="w-full text-xs uppercase tracking-widest py-4 group"
                 icon={ShoppingCart}
-                onClick={onOpenPreorder}
+                onClick={plan.name === 'FREEMIUM' ? onOpenPreorder : onOpenPreorder}
               >
-                Pre-order Now
+                {plan.name === 'FREEMIUM' ? 'Get Started' : 'Pre-order Now'}
               </Button>
             </motion.div>
             </SwiperSlide>
@@ -1048,7 +1094,7 @@ const PreorderVerificationModal = ({ isOpen, onClose }: { isOpen: boolean; onClo
           .then((verifiedEmail) => {
             setEmail(verifiedEmail);
             setStatus('success');
-            // Clean up URL without reload
+
             window.history.replaceState({}, '', window.location.pathname);
           })
           .catch(() => {
@@ -1151,7 +1197,7 @@ const App = () => {
         <Team />
         <PreorderVerificationModal isOpen={isPreorderModalVerificationOpen} onClose={()=>setPreorderModalVerificationOpen(false)} />
         <PreorderModal isOpen={isPreorderModalOpen} onClose={() => setPreorderModalOpen(false)} />
-        <Toaster />
+        <Toaster  />
       </main>
       <Footer />
     </div>
