@@ -38,11 +38,11 @@ const Section = ({ children, className = "", id = "" }: { children: React.ReactN
 const Button = ({ children, variant = "primary", className = "", icon: Icon, ...props }: any) => {
   const baseStyle = "inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold transition-all duration-300 transform active:scale-95 text-sm md:text-base w-full sm:w-auto group";
   const variants = {
-    primary: "bg-indigo-600 text-white hover:bg-indigo-700 shadow-lg shadow-indigo-500/30",
-    secondary: "bg-white text-indigo-900 hover:bg-gray-50 shadow-md border border-gray-100",
+    primary: "bg-[#01B2FE] text-white hover:bg-[#00a0e6] shadow-lg shadow-[#01B2FE]/30",
+    secondary: "bg-white text-[#01B2FE] hover:bg-gray-50 shadow-md border border-gray-100",
     outline: "bg-transparent text-white border border-white/20 hover:bg-white/10 backdrop-blur-sm",
-    priceOutline: "bg-transparent text-indigo-600 border-2 border-indigo-600 hover:bg-indigo-600 hover:text-white",
-    accent: "bg-amber-500 text-white hover:bg-amber-600 shadow-lg shadow-amber-500/30",
+    priceOutline: "bg-transparent text-[#01B2FE] border-2 border-[#01B2FE] hover:bg-[#01B2FE] hover:text-white",
+    accent: "bg-[#01B2FE] text-white hover:bg-[#00a0e6] shadow-lg shadow-[#01B2FE]/30",
     whatsapp: "bg-[#25D366] text-white hover:bg-[#128C7E] shadow-lg shadow-green-500/30"
   };
 
@@ -55,7 +55,7 @@ const Button = ({ children, variant = "primary", className = "", icon: Icon, ...
 };
 
 const Badge = ({ children }: { children: React.ReactNode }) => (
-  <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider bg-indigo-50 text-indigo-600 border border-indigo-100 mb-6">
+  <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider bg-[#e6f7ff] text-[#01B2FE] border border-[#b3ecff] mb-6">
     {children}
   </span>
 );
@@ -90,11 +90,11 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 md:w-10 md:h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">
+          <div className="w-9 h-9 md:w-10 md:h-10 bg-[#01B2FE] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">
             L
           </div>
           <span className={`text-xl md:text-2xl font-black tracking-tighter transition-colors ${isScrolled ? 'text-slate-900' : ' text-white'}`}>
-            LOUD<span className="text-amber-500">!</span>
+            LOUD<span className="text-[#01B2FE]">!</span>
           </span>
         </a>
 
@@ -104,13 +104,13 @@ const Navbar = () => {
             <a 
               key={link.name} 
               href={link.href}
-              className={`text-sm font-bold uppercase tracking-widest hover:text-amber-500 transition-colors ${isScrolled ? 'text-slate-600' : 'text-slate-200'}`}
+              className={`text-sm font-bold uppercase tracking-widest hover:text-[#01B2FE] transition-colors ${isScrolled ? 'text-slate-600' : 'text-slate-200'}`}
             >
               {link.name}
             </a>
           ))}
           <Button 
-            variant={isScrolled ? "primary" : "accent"} 
+            variant="primary"
             className="px-6 py-2.5 text-xs uppercase tracking-widest"
             onClick={() => window.open('https://docs.google.com/forms/d/1iKlK5hbBVd7ShKb__WMHetwdke3iYpv_Jk2B_Tveo0M/edit', '_blank')}
           >
@@ -137,7 +137,7 @@ const Navbar = () => {
             className="fixed inset-0 h-screen w-full bg-white z-[110] p-6 flex flex-col md:hidden"
           >
             <div className="flex justify-between items-center mb-12">
-              <span className="text-2xl font-black">LOUD<span className="text-amber-500">!</span></span>
+              <span className="text-2xl font-black">LOUD<span className="text-[#01B2FE]">!</span></span>
               <button onClick={() => setMobileMenuOpen(false)} className="p-2 bg-slate-100 rounded-full">
                 <X />
               </button>
@@ -178,8 +178,8 @@ const Hero = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 opacity-[0.05]" 
              style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
-        <motion.div style={{ y: y1 }} className="absolute -top-20 -right-20 w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-indigo-600/20 rounded-full blur-[80px] md:blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-[200px] md:w-[600px] h-[200px] md:h-[600px] bg-amber-600/10 rounded-full blur-[80px]" />
+        <motion.div style={{ y: y1 }} className="absolute -top-20 -right-20 w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-[#01B2FE]/20 rounded-full blur-[80px] md:blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[200px] md:w-[600px] h-[200px] md:h-[600px] bg-[#01B2FE]/10 rounded-full blur-[80px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full grid lg:grid-cols-2 gap-12 items-center">
@@ -192,7 +192,7 @@ const Hero = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
           {/* <Badge>New Generation Tech</Badge> */}
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
             Defining Africa's <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Digital Future.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#01B2FE] to-[#00a0e6]">Digital Future.</span>
           </h1>
           <p className="text-base md:text-xl text-slate-300 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
             Removing barriers for African small entrepreneurs through an ecosystem built on community, speed, and shared prosperity.
@@ -248,7 +248,7 @@ const ValueProp = () => {
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
           {stats.map((stat, idx) => (
             <div key={idx} className="px-4 py-4 sm:py-0">
-              <h3 className="text-5xl md:text-6xl font-black text-indigo-600 mb-3 tracking-tighter">{stat.value}</h3>
+              <h3 className="text-5xl md:text-6xl font-black text-[#01B2FE] mb-3 tracking-tighter">{stat.value}</h3>
               <p className="text-sm md:text-base font-black text-slate-900 uppercase tracking-widest mb-2">{stat.label}</p>
               <p className="text-slate-500 text-sm">{stat.desc}</p>
             </div>
@@ -478,7 +478,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
             <div className="px-8 py-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
               <div>
                 <h3 className="text-xl font-black text-slate-900">Pre-order LOUD!</h3>
-                <p className="text-xs font-bold uppercase tracking-widest text-indigo-600">
+                <p className="text-xs font-bold uppercase tracking-widest text-[#01B2FE]">
                   {step === 'email' && 'Step 1: Verification'}
                   {step === 'details' && 'Step 2: Profile Details'}
                   {step === 'payment' && 'Step 3: Payment Gateway'}
@@ -500,7 +500,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                       type="email" 
                       required
                       placeholder="you@example.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all font-medium"
+                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#01B2FE] focus:ring-2 focus:ring-[#b3ecff] outline-none transition-all font-medium"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -523,7 +523,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                         <input 
                           type="text" 
                           required
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 outline-none font-medium"
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#01B2FE] outline-none font-medium"
                           value={formData.first_name}
                           onChange={(e) => setFormData({...formData, first_name: e.target.value})}
                         />
@@ -532,7 +532,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Last Name</label>
                         <input 
                           type="text" 
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 outline-none font-medium"
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#01B2FE] outline-none font-medium"
                           value={formData.last_name}
                           onChange={(e) => setFormData({...formData, last_name: e.target.value})}
                         />
@@ -540,7 +540,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                       <div className="col-span-2">
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Gender</label>
                         <select 
-                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 outline-none font-medium bg-white"
+                          className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#01B2FE] outline-none font-medium bg-white"
                           value={formData.gender}
                           onChange={(e) => setFormData({...formData, gender: e.target.value})}
                         >
@@ -566,8 +566,8 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                           key={pkg.code} 
                           className={`flex items-center p-3 border rounded-xl cursor-pointer transition-all ${
                             formData.package_code === pkg.code 
-                              ? 'border-indigo-600 bg-indigo-50 ring-1 ring-indigo-600' 
-                              : 'border-slate-200 hover:border-indigo-300'
+                              ? 'border-[#01B2FE] bg-[#e6f7ff] ring-1 ring-[#01B2FE]' 
+                              : 'border-slate-200 hover:border-[#b3ecff]'
                           }`}
                         >
                           <input 
@@ -577,7 +577,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                             checked={formData.package_code === pkg.code}
                             onChange={() => setFormData({...formData, package_code: pkg.code})}
                           />
-                          <div className={`w-5 h-5 rounded-full border flex items-center justify-center mr-3 ${formData.package_code === pkg.code ? 'border-indigo-600 bg-indigo-600' : 'border-slate-300'}`}>
+                          <div className={`w-5 h-5 rounded-full border flex items-center justify-center mr-3 ${formData.package_code === pkg.code ? 'border-[#01B2FE] bg-[#01B2FE]' : 'border-slate-300'}`}>
                             {formData.package_code === pkg.code && <Check size={12} className="text-white" />}
                           </div>
                           <span className="font-bold text-slate-900">{pkg.name}</span>
@@ -596,7 +596,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                 <div className="py-12 text-center">
                   <div className="relative w-20 h-20 mx-auto mb-6">
                     <div className="absolute inset-0 border-4 border-slate-100 rounded-full"></div>
-                    <div className="absolute inset-0 border-4 border-indigo-600 rounded-full border-t-transparent animate-spin"></div>
+                    <div className="absolute inset-0 border-4 border-[#01B2FE] rounded-full border-t-transparent animate-spin"></div>
                     <Lock className="absolute inset-0 m-auto text-slate-300" size={24} />
                   </div>
                   <h4 className="text-lg font-bold text-slate-900 mb-2">Initializing Secure Gateway...</h4>
@@ -618,7 +618,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                       : `We'll send a confirmation email to ${email} after payment.`
                     }
                   </p>
-                  <Button variant="outline" className="text-indigo-600 border-indigo-200 hover:bg-indigo-50 w-full" onClick={onClose}>
+                  <Button variant="outline" className="text-[#01B2FE] border-[#b3ecff] hover:bg-[#e6f7ff] w-full" onClick={onClose}>
                     Close
                   </Button>
                 </div>
@@ -661,7 +661,7 @@ const Features = () => {
       <div className="max-w-7xl mx-auto px-2">
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
           <Badge>Core Features</Badge>
-          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Expressively <span className="text-indigo-600">Loud.</span></h2>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Expressively <span className="text-[#01B2FE]">Loud.</span></h2>
           <p className="text-slate-600 text-sm md:text-lg px-4 font-medium">Giving African voices expression into the deepest fabrics of the world.</p>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 md:gap-8">
@@ -671,8 +671,8 @@ const Features = () => {
               whileHover={{ y: -5 }}
               className="p-5 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300"
             >
-              <div className="w-10 h-10 md:w-14 md:h-14 bg-indigo-50 rounded-xl md:rounded-2xl flex items-center justify-center mb-5">
-                <f.icon className="w-5 h-5 md:w-7 md:h-7 text-indigo-600" />
+              <div className="w-10 h-10 md:w-14 md:h-14 bg-[#e6f7ff] rounded-xl md:rounded-2xl flex items-center justify-center mb-5">
+                <f.icon className="w-5 h-5 md:w-7 md:h-7 text-[#01B2FE]" />
               </div>
               <h3 className="text-sm md:text-xl font-black text-slate-900 mb-2">{f.title}</h3>
               <p className="text-slate-500 text-[10px] md:text-sm leading-relaxed">{f.desc}</p>
@@ -782,7 +782,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <Badge>Pre-order & Reserve</Badge>
-          <h2 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Invest in Your <span className="text-amber-500">Prosperity.</span></h2>
+          <h2 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Invest in Your <span className="text-[#01B2FE]">Prosperity.</span></h2>
           <p className="text-slate-500 text-sm md:text-lg mb-10 max-w-xl mx-auto px-4 font-medium">
             Lock in early-bird rates and priority access. Official launch coming soon.
           </p>
@@ -814,15 +814,15 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
                 <motion.div
                   whileHover={{
                     y: -15,
-                    boxShadow: "0 25px 50px -12px rgba(79, 70, 229, 0.15)",
-                    borderColor: "rgba(79, 70, 229, 0.4)"
+                    boxShadow: "0 25px 50px -12px rgba(1, 178, 254, 0.15)",
+                    borderColor: "rgba(1, 178, 254, 0.4)"
                   }}
                    className={`p-8 md:p-10 rounded-[2.5rem] border-2
     flex flex-col h-full w-full md:w-96
     transition-all duration-500 relative
     ${
       plan.highlight
-        ? 'bg-slate-900 text-white border-indigo-500 shadow-2xl'
+        ? 'bg-slate-900 text-white border-[#01B2FE] shadow-2xl'
         : 'bg-white text-slate-900 border-slate-100'
     }
   `}
@@ -847,7 +847,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
               <div className="space-y-4 mb-10 flex-1">
                 {plan.features.map((feature, idx) => (
                   <div key={idx} className="flex items-center gap-3">
-                    <Check size={18} className={plan.highlight ? 'text-indigo-400' : 'text-indigo-600'} />
+                    <Check size={18} className={plan.highlight ? 'text-[#01B2FE]' : 'text-[#01B2FE]'} />
                     <span className={`text-sm font-bold ${plan.highlight ? 'text-slate-200' : 'text-slate-700'}`}>{feature}</span>
                   </div>
                 ))}
@@ -889,18 +889,18 @@ const StoryAndVision = () => {
 
           <motion.div 
              whileHover={{ scale: 1.02 }}
-             className="order-1 lg:order-2 bg-indigo-900 rounded-[2rem] md:rounded-[3rem] p-8 md:p-14 text-white relative overflow-hidden shadow-2xl"
+             className="order-1 lg:order-2 bg-[#00567a] rounded-[2rem] md:rounded-[3rem] p-8 md:p-14 text-white relative overflow-hidden shadow-2xl"
           >
-             <div className="absolute top-0 right-0 w-48 md:w-80 h-48 md:h-80 bg-indigo-600/30 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/3" />
+             <div className="absolute top-0 right-0 w-48 md:w-80 h-48 md:h-80 bg-[#01B2FE]/30 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/3" />
              <div className="relative z-10">
-               <div className="w-12 h-1 bg-amber-500 mb-8" />
+               <div className="w-12 h-1 bg-[#01B2FE] mb-8" />
                <h3 className="text-2xl md:text-4xl font-black mb-6 leading-tight">"Creating an infrastructure of shared prosperity."</h3>
-               <p className="text-sm md:text-lg text-indigo-200 font-bold uppercase tracking-widest mb-10">The Vision</p>
+               <p className="text-sm md:text-lg text-[#e6f7ff] font-bold uppercase tracking-widest mb-10">The Vision</p>
                <div className="flex items-center gap-4">
-                 <div className="h-2 flex-1 bg-indigo-950 rounded-full overflow-hidden">
-                   <div className="h-full w-[85%] bg-amber-500 rounded-full" />
+                 <div className="h-2 flex-1 bg-[#00344a] rounded-full overflow-hidden">
+                   <div className="h-full w-[85%] bg-[#01B2FE] rounded-full" />
                  </div>
-                 <span className="text-[10px] font-black text-amber-500 uppercase tracking-widest">Active</span>
+                 <span className="text-[10px] font-black text-[#01B2FE] uppercase tracking-widest">Active</span>
                </div>
              </div>
           </motion.div>
@@ -936,7 +936,7 @@ const GrowthStrategy = () => {
               whileHover={{ y: -5 }}
               className="p-6 md:p-8 bg-white/5 rounded-2xl md:rounded-3xl border border-white/10 flex flex-col items-center gap-4 hover:bg-white/10 transition-colors"
             >
-              <div className="w-10 h-10 md:w-12 md:h-12 bg-indigo-600 rounded-full flex items-center justify-center shadow-lg shadow-indigo-600/20">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-[#01B2FE] rounded-full flex items-center justify-center shadow-lg shadow-[#01B2FE]/20">
                 <s.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </div>
               <span className="font-black text-[10px] md:text-xs uppercase tracking-[0.2em]">{s.label}</span>
@@ -981,7 +981,7 @@ const Team = () => {
               </div>
               <div className="text-center px-2">
                 <h3 className="text-sm md:text-lg font-black text-slate-900 leading-tight mb-1">{member.name}</h3>
-                <p className="text-[9px] md:text-xs text-indigo-600 font-bold uppercase tracking-widest">{member.role}</p>
+                <p className="text-[9px] md:text-xs text-[#01B2FE] font-bold uppercase tracking-widest">{member.role}</p>
               </div>
             </div>
           ))}
@@ -997,8 +997,8 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
         <div className="text-center md:text-left">
           <div className="flex items-center justify-center md:justify-start gap-2 mb-8 text-white">
-            <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-black text-xl">L</div>
-            <span className="text-2xl font-black">LOUD<span className="text-amber-500">!</span></span>
+            <div className="w-10 h-10 bg-[#01B2FE] rounded-xl flex items-center justify-center font-black text-xl">L</div>
+            <span className="text-2xl font-black">LOUD<span className="text-[#01B2FE]">!</span></span>
           </div>
           <p className="text-sm md:text-base leading-relaxed text-slate-400 mb-8 max-w-xs mx-auto md:mx-0 font-medium">
             Giving expression to African voices and letting them sound Loud in the global market.
@@ -1007,8 +1007,11 @@ const Footer = () => (
              <a href="https://whatsapp.com/channel/0029VbBPWHuLikg8UnhPvF1r" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all">
                <MessageCircle className="w-5 h-5" />
              </a>
-             <a href="mailto:loudproductsint@gmail.com" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all">
+             <a href="mailto:support@loudproductslimited.com" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#01B2FE] hover:text-white transition-all">
                <Mail className="w-5 h-5" />
+             </a>
+             <a href="https://www.linkedin.com/company/loud-products-limited1/" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
              </a>
           </div>
         </div>
@@ -1017,12 +1020,12 @@ const Footer = () => (
           <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Contact</h4>
           <ul className="space-y-6 text-sm font-bold">
             <li className="flex flex-col md:flex-row items-center gap-3">
-              <Phone className="w-4 h-4 text-indigo-500" />
-              <span>+809 272 561 823</span>
+              <Phone className="w-4 h-4 text-[#01B2FE]" />
+              <span>07065427513, 09156094521</span>
             </li>
             <li className="flex flex-col md:flex-row items-center gap-3">
-              <Mail className="w-4 h-4 text-indigo-500" />
-              <span>loudproductsint@gmail.com</span>
+              <Mail className="w-4 h-4 text-[#01B2FE]" />
+              <span>support@loudproductslimited.com</span>
             </li>
           </ul>
         </div>
@@ -1030,16 +1033,16 @@ const Footer = () => (
         <div className="hidden md:block">
           <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Quick Links</h4>
           <ul className="space-y-4 text-sm font-bold">
-            <li><a href="#story" className="hover:text-amber-500 transition-colors">Our Story</a></li>
-            <li><a href="#pricing" className="hover:text-amber-500 transition-colors">Pre-order</a></li>
-            <li><a href="#growth" className="hover:text-amber-500 transition-colors">Roadmap</a></li>
+            <li><a href="#story" className="hover:text-[#01B2FE] transition-colors">Our Story</a></li>
+            <li><a href="#pricing" className="hover:text-[#01B2FE] transition-colors">Pre-order</a></li>
+            <li><a href="#growth" className="hover:text-[#01B2FE] transition-colors">Roadmap</a></li>
           </ul>
         </div>
         
         <div>
           <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8 text-center md:text-left">Get Involved</h4>
           <div className="flex flex-col gap-3">
-            <input type="email" placeholder="Email for updates" className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 w-full text-sm outline-none focus:ring-2 focus:ring-indigo-500 transition-all text-white font-medium" />
+            <input type="email" placeholder="Email for updates" className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 w-full text-sm outline-none focus:ring-2 focus:ring-[#01B2FE] transition-all text-white font-medium" />
             <Button variant="primary" className="w-full text-xs uppercase tracking-widest">Subscribe</Button>
           </div>
         </div>
@@ -1125,7 +1128,7 @@ const PreorderVerificationModal = ({ isOpen, onClose }: { isOpen: boolean; onClo
           >
             {status === 'verifying' && (
               <div className="py-12">
-                 <div className="w-16 h-16 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin mx-auto mb-6"/>
+                 <div className="w-16 h-16 border-4 border-[#b3ecff] border-t-[#01B2FE] rounded-full animate-spin mx-auto mb-6"/>
                  <h3 className="text-xl font-bold text-slate-900 mb-2">Verifying Transaction...</h3>
                  <p className="text-slate-500 text-sm">Please wait while we confirm your preorder.</p>
               </div>
@@ -1185,7 +1188,7 @@ const App = () => {
 
 
   return (
-    <div className="font-sans text-slate-900 bg-white selection:bg-indigo-600 selection:text-white overflow-x-hidden scroll-smooth">
+    <div className="font-sans text-slate-900 bg-white selection:bg-[#01B2FE] selection:text-white overflow-x-hidden scroll-smooth">
       <Navbar />
       <main>
         <Hero onOpenPreorder={() => setPreorderModalOpen(true)} />
