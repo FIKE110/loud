@@ -1303,7 +1303,7 @@ const HowItWorks = () => {
 
   const tabs = [
     { id: 'clients', label: 'Clients & Govt', icon: Globe },
-    { id: 'contractors & Professionals', label: 'Contractors', icon: Briefcase },
+    { id: 'contractors', label: 'Contractors', icon: Briefcase },
 
   ];
   const steps = [
