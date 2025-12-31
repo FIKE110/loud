@@ -7,7 +7,7 @@ import webhook from './webhook';
 
 const app = new Hono();
 
-const frontend_url=process.env.FRONTEND_URL || "http://localhost:5173"
+// const frontend_url=process.env.FRONTEND_URL || "http://localhost:5173"
 
 app.use(cors())
 

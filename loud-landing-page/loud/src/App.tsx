@@ -6,7 +6,24 @@ import {
   MessageCircle, Camera, Lock, Palette, Briefcase,
    ShoppingCart,
   Loader2,
-  XCircle
+  XCircle,
+  MapPinOff,
+  Clock,
+  Coins,
+  Cpu,
+  Unlock,
+  FileCheck,
+  Crown,
+  HandHeart,
+  Tag,
+  Smile,
+  LayoutDashboard,
+  LineChart,
+  UserCheck,
+  Gavel,
+  Scale,
+  Key,
+  Wifi
 
 
 // Import Swiper styles
@@ -75,6 +92,8 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', href: '#hero' },
     { name: 'Features', href: '#features' },
+    { name: 'Benefits', href: '#benefits' },
+    { name: 'How it works', href: '#how-it-works' },
     { name: 'Pre-order', href: '#pricing' },
     { name: 'Growth', href: '#growth' },
     { name: 'Team', href: '#team' },
@@ -951,7 +970,7 @@ const GrowthStrategy = () => {
 const Team = () => {
   const team = [
     { name: "Sylvester Okafor", role: "Founder & CEO", img: "/assets/img/person.jpg" },
-    { name: "Barr. Sonny Olajide", role: "Legal Director", img: "/assets/img/editperson7.jpg" },
+    { name: "Endwell Obinuchi Chinda", role: "Legal Director", img: "/assets/img/person7r.jpg" },
     { name: "Isaiah Omame", role: "CTO", img: "/assets/img/person6.jpg" },
     { name: "Godwin Ngusen J.", role: "Engineering Mgr", img: "/assets/img/person1.jpg" },
     { name: "Stephen O'Meara", role: "Board Chairman", img: "/assets/img/person2.jpg" },
@@ -1048,7 +1067,7 @@ const Footer = () => (
         </div>
       </div>
       <div className="border-t border-white/5 pt-10 text-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">
-        <p>© 2025 LOUD! TECHNOLOGIES INC. ALL RIGHTS RESERVED.</p>
+        <p>© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
       </div>
     </div>
   </footer>
@@ -1172,7 +1191,309 @@ const PreorderVerificationModal = ({ isOpen, onClose }: { isOpen: boolean; onClo
   );
 }
 
+
+
+const Benefits = () => {
+  const [activeTab, setActiveTab] = useState<'contractors' | 'creators' | 'clients'>('contractors');
+
+  const tabs = [
+    { id: 'contractors', label: 'Contractors', icon: Briefcase },
+    { id: 'creators', label: 'Creators', icon: Palette },
+    { id: 'clients', label: 'Clients & Govt', icon: Globe },
+  ];
+
+  const content = {
+    contractors: [
+      { icon: MapPinOff, title: "No Travel Required", desc: "100% elimination of travel for contract docs." },
+      { icon: Globe, title: "Digital Bidding", desc: "Submit bids from anywhere, anytime." },
+      { icon: Clock, title: "Time Saver", desc: "No more spending hours in bidding rooms." },
+      { icon: Coins, title: "Cost Effective", desc: "Saves you valuable time and money." },
+      { icon: Cpu, title: "Automated Trust", desc: "No human interference, guaranteeing confidence." },
+      { icon: TrendingUp, title: "Income Growth", desc: "Your go-to platform to increase monthly income." },
+      { icon: Unlock, title: "Unlimited Access", desc: "Access private, public, and international contracts." },
+      { icon: FileCheck, title: "Smart Handling", desc: "Handles technical & financial bids automatically." },
+      { icon: Shield, title: "80% Cheaper", desc: "Safer and cheaper than manual processes." },
+    ],
+    creators: [
+      { icon: Crown, title: "Creator Priority", desc: "African creator priority in all features." },
+      { icon: HandHeart, title: "Daily Earnings", desc: "Earn daily using the gifting feature." },
+      { icon: Tag, title: "30x Cheaper", desc: "More affordable than alternative platforms." },
+      { icon: Zap, title: "10x Faster", desc: "Accelerated earning potential." },
+      { icon: Smile, title: "Seamless Money", desc: "No help needed to monetize. Simple & fast." },
+    ],
+    clients: [
+      { icon: LayoutDashboard, title: "Effortless Display", desc: "Create & display dream projects easily." },
+      { icon: LineChart, title: "Best ROI", desc: "Offers you rest and best value in return on investment." },
+      { icon: UserCheck, title: "Risk Free", desc: "No more reliance on friends & family for projects." },
+      { icon: Gavel, title: "First of its Kind", desc: "Handles technical & financial bids for procurement." },
+      { icon: Scale, title: "Fair Awards", desc: "Awards contracts impartially to the best bidder." },
+      { icon: Shield, title: "Safer Process", desc: "80% cheaper and safer than manual ways." },
+    ]
+  };
+
+  return (
+    <Section id="benefits" className="bg-slate-50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <Badge>Unlock Your Potential</Badge>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6">Who is LOUD! For?</h2>
+          <p className="text-slate-600 max-w-2xl mx-auto text-lg">
+            Tailored benefits for every player in the African digital economy.
+          </p>
+        </div>
+
+        {/* Tabs */}
+        <div className="flex justify-center mb-16">
+          <div className="inline-flex bg-white p-2 rounded-2xl shadow-sm border border-slate-100 gap-2 overflow-x-auto max-w-full">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex items-center px-6 py-3 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
+                  activeTab === tab.id 
+                    ? 'bg-[#01B2FE] text-white shadow-lg shadow-indigo-200' 
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                }`}
+              >
+                <tab.icon size={18} className="mr-2" />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Content Grid */}
+        <div className="min-h-[400px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {content[activeTab].map((item, i) => (
+                <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-lg hover:border-indigo-100 transition-all group">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-indigo-50 text-[#01B2FE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                      <item.icon size={24} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 text-lg mb-2">{item.title}</h4>
+                      <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
+    </Section>
+  );
+};
 // --- MAIN LAYOUT ---
+
+
+
+const HowItWorks = () => {
+
+   const [activeTab, setActiveTab] = useState<'contractors' | 'clients'>('clients');
+
+  const tabs = [
+    { id: 'clients', label: 'Clients & Govt', icon: Globe },
+    { id: 'contractors & Professionals', label: 'Contractors', icon: Briefcase },
+
+  ];
+  const steps = [
+    {
+      title: "Create a Project",
+      desc: "Set up a project by adding key details, requirements, and expectations.",
+      image: "/assets/img/works1.png",
+      pill: "Step 1"
+    },
+    {
+       title: "Promote a Project",
+        desc: "Boost visibility by promoting your project to reach more contractors.",
+      image: "/assets/img/works2.png",
+      pill: "Step 2"
+    },
+    {
+     title: "Submit Project for Discovery",
+        desc: "Submit your project to be discovered by qualified contractors on the platform.",
+      image: "/assets/img/works3.png",
+      pill: "Step 3"
+    }
+  ];
+
+  const steps2 = [
+    {
+      title: "Discover Projects",
+        desc: "Browse and explore available projects that match your expertise.",
+      image: "/assets/img/works4.png",
+      pill: "Step 1"
+    },
+    {
+      title: "Submit Project Bid",
+        desc: "Place a bid confidently and communicate your value to the project owner.",
+      image: "/assets/img/works5.png",
+      pill: "Step 2"
+    },
+    {
+      title: "Contract Award",
+        desc: "Successful bids are reviewed and contracts are awarded.",
+      image: "/assets/img/works6.png",
+      pill: "Step 3"
+    }
+  ];
+
+
+
+  return (
+    <Section id="how-it-works" className="bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-16 md:mb-24">
+          <Badge>Simple Process</Badge>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">How <span className="text-[#01B2FE]">LOUD!</span> Works</h2>
+          <p className="text-slate-600 text-base md:text-xl max-w-2xl mx-auto font-medium">
+            We've simplified complex systems into three easy steps.
+          </p>
+        </div>
+
+         {/* Tabs */}
+        <div className="flex justify-center mb-16">
+          <div className="inline-flex bg-white p-2 rounded-2xl shadow-sm border border-slate-100 gap-2 overflow-x-auto max-w-full">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex items-center px-6 py-3 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
+                  activeTab === tab.id 
+                    ? 'bg-[#01B2FE] text-white shadow-lg shadow-indigo-200' 
+                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                }`}
+              >
+                <tab.icon size={18} className="mr-2" />
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+
+        <div className="space-y-16 md:space-y-24">
+          {activeTab==='clients' ? steps.map((step, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+            >
+              {/* Image Side */}
+              <div className="w-full md:w-1/2 relative group">
+                <div className="absolute inset-0 bg-[#01B2FE] rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20 blur-xl" />
+                <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] border border-slate-100">
+                  <img 
+                    src={step.image} 
+                    alt={step.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Floating Pill */}
+                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#01B2FE] shadow-lg border border-white/50">
+                    {step.pill}
+                  </div>
+                </div>
+              </div>
+
+              {/* Text Side */}
+              <div className="w-full md:w-1/2">
+                <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-4">{step.title}</h3>
+                <p className="text-slate-600 text-lg leading-relaxed">{step.desc}</p>
+              </div>
+            </motion.div>
+          )) : steps2.map((step, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+              className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+            >
+              {/* Image Side */}
+              <div className="w-full md:w-1/2 relative group">
+                <div className="absolute inset-0 bg-[#01B2FE] rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20 blur-xl" />
+                <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] border border-slate-100">
+                  <img 
+                    src={step.image} 
+                    alt={step.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Floating Pill */}
+                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#01B2FE] shadow-lg border border-white/50">
+                    {step.pill}
+                  </div>
+                </div>
+              </div>
+
+              {/* Text Side */}
+              <div className="w-full md:w-1/2">
+                <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-4">{step.title}</h3>
+                <p className="text-slate-600 text-lg leading-relaxed">{step.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+const Offering = () => {
+  const offerings = [
+    { icon: Shield, title: "Trust", desc: "Automated, transparent systems for total confidence." },
+    { icon: Key, title: "Access", desc: "Unlocking opportunities for every African enterprise." },
+    { icon: Wifi, title: "Proximity", desc: "Connecting you to global markets instantly." },
+    { icon: Scale, title: "Equity", desc: "An even playing ground for everyone in procurement." },
+  ];
+
+  return (
+    <Section className="bg-slate-900 relative overflow-hidden">
+      <div className="absolute inset-0 bg-indigo-900/10 pointer-events-none" />
+      <div className="max-w-7xl mx-auto relative z-10 px-4">
+        <div className="text-center mb-16">
+          <Badge>Our Promise</Badge>
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-6">The LOUD! Standard</h2>
+          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+            We are redefining the rules of engagement for African business.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {offerings.map((offer, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-center group"
+            >
+              <div className="w-16 h-16 rounded-2xl bg-[#01B2FE] flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform shadow-lg shadow-[#01B2FE]/30">
+                <offer.icon className="text-white w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">{offer.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed">{offer.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </Section>
+  );
+};
+
 
 const App = () => {
 
@@ -1194,6 +1515,8 @@ const App = () => {
         <Hero onOpenPreorder={() => setPreorderModalOpen(true)} />
         <ValueProp />
         <Features />
+        <Benefits />
+        <HowItWorks />
         <Pricing onOpenPreorder={() => setPreorderModalOpen(true)}/>
         <StoryAndVision />
         <GrowthStrategy />

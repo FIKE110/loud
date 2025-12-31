@@ -12,7 +12,7 @@ BEGIN
     CREATE TYPE currency_enum AS ENUM ('USD', 'NGN');
   END IF;
 
-  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'preorder_status_enum') THEN
+  IF NOT EXISTS (SELECT 1  FROM pg_type WHERE typname = 'preorder_status_enum') THEN
     CREATE TYPE preorder_status_enum AS ENUM ('PENDING', 'PAID', 'REFUNDED', 'CANCELLED');
   END IF;
 END $$;

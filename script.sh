@@ -27,7 +27,7 @@ case "$COMMAND" in
 
     (
       cd loud-backend
-      pnpm install
+      bun install
       pnpm run dev
     ) &
 
