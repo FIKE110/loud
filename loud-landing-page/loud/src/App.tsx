@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Menu, X, ArrowRight, Check, Zap, Globe, 
-  Shield,  Users, TrendingUp, 
-   Mail, Phone, 
+import {
+  Menu, X, ArrowRight, Check, Zap, Globe,
+  Shield, Users, TrendingUp,
+  Mail, Phone,
   MessageCircle, Camera, Lock, Palette, Briefcase,
-   ShoppingCart,
+  ShoppingCart,
   Loader2,
   XCircle,
   MapPinOff,
@@ -26,11 +26,11 @@ import {
   Wifi
 
 
-// Import Swiper styles
-} from 'lucide-react'; 
+  // Import Swiper styles
+} from 'lucide-react';
 import './App.css'
-import {toast, Toaster} from 'sonner'
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { toast, Toaster } from 'sonner'
+import { motion, AnimatePresence, useScroll, useTransform, type Variants } from 'framer-motion';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -39,6 +39,86 @@ import { Pagination } from 'swiper/modules';
 import 'swiper/css/pagination';
 
 import 'swiper/css';
+
+/**
+ * ANIMATION CONFIGURATION
+ */
+const ANIMATION_VARIANTS = {
+  container: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  },
+  item: {
+    hidden: { opacity: 0, y: 20, filter: 'blur(10px)' },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        type: "spring",
+        stiffness: 50,
+        damping: 20,
+        duration: 0.8
+      }
+    },
+  },
+  fadeIn: {
+    hidden: { opacity: 0, filter: 'blur(10px)' },
+    visible: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  }
+};
+
+const Reveal = ({ children, className = "", delay = 0 }: { children: React.ReactNode, className?: string, delay?: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+    whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.7, delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
+
+const LoadingScreen = () => (
+  <motion.div
+    className="fixed inset-0 z-[200] flex items-center justify-center bg-slate-950"
+    initial={{ opacity: 1 }}
+    exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
+  >
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="flex flex-col items-center"
+    >
+      <div className="w-16 h-16 bg-[#01B2FE] rounded-2xl flex items-center justify-center text-white font-black text-3xl shadow-2xl shadow-[#01B2FE]/50 mb-6">
+        L
+      </div>
+      <motion.div
+        className="h-1 w-32 bg-slate-800 rounded-full overflow-hidden"
+      >
+        <motion.div
+          className="h-full bg-[#01B2FE]"
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        />
+      </motion.div>
+    </motion.div>
+  </motion.div>
+);
+
 /**
  * THEME CONFIGURATION
  * Colors: Indigo (Innovation), Amber (Growth), Slate (Professional)
@@ -100,12 +180,11 @@ const Navbar = () => {
   ];
 
   return (
-    <nav 
-      className={`fixed top-0 w-full z-[100] transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-md py-3' 
-          : 'bg-transparent py-5 md:py-7'
-      }`}
+    <nav
+      className={`fixed top-0 w-full z-[100] transition-all duration-500 ${isScrolled
+        ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
+        : 'bg-transparent py-5 md:py-7'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2 group">
@@ -120,15 +199,15 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a 
-              key={link.name} 
+            <a
+              key={link.name}
               href={link.href}
               className={`text-sm font-bold uppercase tracking-widest hover:text-[#01B2FE] transition-colors ${isScrolled ? 'text-slate-600' : 'text-slate-200'}`}
             >
               {link.name}
             </a>
           ))}
-          <Button 
+          <Button
             variant="primary"
             className="px-6 py-2.5 text-xs uppercase tracking-widest"
             onClick={() => window.open('https://docs.google.com/forms/d/1iKlK5hbBVd7ShKb__WMHetwdke3iYpv_Jk2B_Tveo0M/edit', '_blank')}
@@ -138,7 +217,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Toggle */}
-        <button 
+        <button
           className="md:hidden p-2 rounded-lg bg-slate-100/50 text-slate-900"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
@@ -149,7 +228,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
@@ -163,8 +242,8 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col space-y-6">
               {navLinks.map((link) => (
-                <a 
-                  key={link.name} 
+                <a
+                  key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-3xl font-black text-slate-900 border-b border-slate-100 pb-2"
@@ -191,61 +270,85 @@ const Navbar = () => {
 const Hero = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
     <div id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center pt-28 pb-16 overflow-hidden bg-slate-900">
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.05]" 
-             style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
-        <motion.div style={{ y: y1 }} className="absolute -top-20 -right-20 w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-[#01B2FE]/20 rounded-full blur-[80px] md:blur-[120px]" />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.05]"
+          style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '32px 32px' }}></div>
+        <motion.div style={{ y: y1, opacity }} className="absolute -top-20 -right-20 w-[300px] md:w-[800px] h-[300px] md:h-[800px] bg-[#01B2FE]/20 rounded-full blur-[80px] md:blur-[120px]" />
         <div className="absolute bottom-0 left-0 w-[200px] md:w-[600px] h-[200px] md:h-[600px] bg-[#01B2FE]/10 rounded-full blur-[80px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 w-full grid lg:grid-cols-2 gap-12 items-center">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+        <motion.div
+          variants={ANIMATION_VARIANTS.container}
+          initial="hidden"
+          animate="visible"
           className="text-center lg:text-left"
         >
-          {/* <Badge>New Generation Tech</Badge> */}
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tighter">
+          <motion.div variants={ANIMATION_VARIANTS.item}>
+            {/* <Badge>New Generation Tech</Badge> */}
+          </motion.div>
+
+          <motion.h1
+            variants={ANIMATION_VARIANTS.item}
+            className="text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tighter"
+          >
             Defining Africa's <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#01B2FE] to-[#00a0e6]">Digital Future.</span>
-          </h1>
-          <p className="text-base md:text-xl text-slate-300 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
+          </motion.h1>
+
+          <motion.p
+            variants={ANIMATION_VARIANTS.item}
+            className="text-base md:text-xl text-slate-300 mb-10 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium"
+          >
             Removing barriers for African small entrepreneurs through an ecosystem built on community, speed, and shared prosperity.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <Button 
-              icon={ArrowRight} 
-              // onClick={() => window.open('https://docs.google.com/forms/d/1iKlK5hbBVd7ShKb__WMHetwdke3iYpv_Jk2B_Tveo0M/edit', '_blank')}
+          </motion.p>
+
+          <motion.div
+            variants={ANIMATION_VARIANTS.item}
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          >
+            <Button
+              icon={ArrowRight}
               onClick={onOpenPreorder}
+              className="hover:scale-105 transition-transform"
             >
               Pre-order Now
             </Button>
-            <Button 
-              variant="whatsapp" 
-              icon={MessageCircle} 
+            <Button
+              variant="whatsapp"
+              icon={MessageCircle}
               onClick={() => window.open('https://whatsapp.com/channel/0029VbBPWHuLikg8UnhPvF1r', '_blank')}
+              className="hover:scale-105 transition-transform"
             >
               Join the Channel
             </Button>
-          </div>
+          </motion.div>
         </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9, y: 50 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2, type: 'spring', stiffness: 50 }}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 50, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 1.2, delay: 0.4, type: 'spring', stiffness: 40 }}
           className="relative hidden sm:flex items-center justify-center"
         >
-          <img 
-            src="/assets/img/heroimg2.png" 
+          <motion.img
+            src="/assets/img/heroimg2.png"
             alt="Loud App on Smartphone"
-            className="w-full max-w-[430px] md:max-w-[320px] lg:max-w-[500px] h-auto object-contain transform transition-transform duration-700 hover:scale-105"
+            className="w-full max-w-[430px] md:max-w-[320px] lg:max-w-[500px] h-auto object-contain"
             style={{
-              filter: 'drop-shadow(0 25px 25px rgba(0,0,0,0.3))'
+              filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.4))'
+            }}
+            animate={{
+              y: [0, -15, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
             }}
           />
         </motion.div>
@@ -264,114 +367,120 @@ const ValueProp = () => {
   return (
     <Section className="bg-white border-b border-slate-100">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+        <motion.div
+          variants={ANIMATION_VARIANTS.container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100"
+        >
           {stats.map((stat, idx) => (
-            <div key={idx} className="px-4 py-4 sm:py-0">
+            <motion.div variants={ANIMATION_VARIANTS.item} key={idx} className="px-4 py-4 sm:py-0">
               <h3 className="text-5xl md:text-6xl font-black text-[#01B2FE] mb-3 tracking-tighter">{stat.value}</h3>
               <p className="text-sm md:text-base font-black text-slate-900 uppercase tracking-widest mb-2">{stat.label}</p>
               <p className="text-slate-500 text-sm">{stat.desc}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </Section>
   );
 };
 
 type ProfileStatus = 'NO_PROFILE' | 'PROFILE_NO_PREORDER' | 'PROFILE_WITH_PREORDER';
- const backend_url=import.meta.env.VITE_BACKEND_URL;
-  const mockCheckProfile = async (email: string): Promise<{ status: ProfileStatus; message?: string }> => {
-   
-  const response=await fetch(`${backend_url}/api/user/${email}`)
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+const mockCheckProfile = async (email: string): Promise<{ status: ProfileStatus; message?: string }> => {
+
+  const response = await fetch(`${backend_url}/api/user/${email}`)
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
 
   const data = await response.json();
-  const { status,preorder ,freemium} = data;
+  const { status, preorder, freemium } = data;
 
-  if(data.error){
+  if (data.error) {
     throw new Error(data.error);
   }
   return new Promise((resolve) => {
 
-      if (status && preorder && !freemium) {
-        resolve({ status: 'PROFILE_WITH_PREORDER', message: 'User has a preorder.' });
-      } else if (status || freemium) {
-        resolve({ status: 'PROFILE_NO_PREORDER',message:freemium ? 'true' : 'false'});
-      } else {
-        resolve({ status: 'NO_PROFILE' });
-      }
+    if (status && preorder && !freemium) {
+      resolve({ status: 'PROFILE_WITH_PREORDER', message: 'User has a preorder.' });
+    } else if (status || freemium) {
+      resolve({ status: 'PROFILE_NO_PREORDER', message: freemium ? 'true' : 'false' });
+    } else {
+      resolve({ status: 'NO_PROFILE' });
+    }
   });
 };
 
-const mockProcessPaymentAlready = async (formData:{
-    package_code: string;
-},email:string): Promise<string> => {
-  const response=await fetch(`${backend_url}/api/paystack/initialize`, {
+const mockProcessPaymentAlready = async (formData: {
+  package_code: string;
+}, email: string): Promise<string> => {
+  const response = await fetch(`${backend_url}/api/paystack/initialize`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ package_code: formData.package_code,email }),
+    body: JSON.stringify({ package_code: formData.package_code, email }),
   });
 
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
 
-  const {authorization_url} = await response.json();
+  const { authorization_url } = await response.json();
   return authorization_url;
 };
 
-const mockProcessPayment = async (formData:{
-    first_name: string;
-    last_name: string;
-    gender: string;
-    package_code: string;
-},email:string): Promise<string> => {
-  const response=await fetch(`${backend_url}/api/user/register-and-pay`, {
+const mockProcessPayment = async (formData: {
+  first_name: string;
+  last_name: string;
+  gender: string;
+  package_code: string;
+}, email: string): Promise<string> => {
+  const response = await fetch(`${backend_url}/api/user/register-and-pay`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ ...formData,email }),
+    body: JSON.stringify({ ...formData, email }),
   });
 
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
 
-  const {authorization_url} = await response.json();
+  const { authorization_url } = await response.json();
   return authorization_url;
 };
 
-const mockProcessFreemium = async (formData:{
-    first_name: string;
-    last_name: string;
-    gender: string;
-    package_code: string;
-},email:string): Promise<string> => {
-  const response=await fetch(`${backend_url}/api/user/register-freemium`, {
+const mockProcessFreemium = async (formData: {
+  first_name: string;
+  last_name: string;
+  gender: string;
+  package_code: string;
+}, email: string): Promise<string> => {
+  const response = await fetch(`${backend_url}/api/user/register-freemium`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ ...formData,email }),
+    body: JSON.stringify({ ...formData, email }),
   });
 
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
 
-  const {message} = await response.json();
+  const { message } = await response.json();
   return message;
 };
 
 const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onClose: () => void; currentStep?: 'email' | 'details' | 'payment' | 'success' }) => {
   const [step, setStep] = useState<'email' | 'details' | 'payment' | 'success'>('email');
   const [loading, setLoading] = useState(false);
-  
+
   // Form Data
   const [email, setEmail] = useState('');
   const [formData, setFormData] = useState({
@@ -395,7 +504,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
   }, [isOpen]);
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
-    
+
     e.preventDefault();
     setIsNewUser(true)
     if (!email.includes('@')) {
@@ -406,18 +515,18 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
     setLoading(true);
     try {
       const result = await mockCheckProfile(email);
-      
-      
+
+
       if (result.status === 'PROFILE_WITH_PREORDER') {
         toast.info("User has a preorder. Check your email for more information.");
         onClose();
       } else if (result.status === 'PROFILE_NO_PREORDER') {
         setStep('details');
         setIsNewUser(false) // But in render logic, we'll only show package field
-        result.message==='true' ?
+        result.message === 'true' ?
           toast.success("You are already on the freemium")
-        :
-        toast.success("Welcome back! Please select your package.");
+          :
+          toast.success("Welcome back! Please select your package.");
       } else {
         setStep('details');
       }
@@ -425,15 +534,15 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
       toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
-   
+
     }
   };
 
   const handleDetailsSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();   
+    e.preventDefault();
 
-    if (step === 'details' && !formData.first_name ) {
-      setIsNewUser(false) 
+    if (step === 'details' && !formData.first_name) {
+      setIsNewUser(false)
     }
 
     if (formData.package_code === 'FREEMIUM') {
@@ -449,7 +558,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
       const message = await mockProcessFreemium(formData, email)
       setStep('success');
       toast.success(message);
-    
+
     } catch (err) {
       setStep('details');
       toast.error("Freemium registration failed. Please try again.");
@@ -463,12 +572,12 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
         ? await mockProcessPayment(formData, email)
         : await mockProcessPaymentAlready(formData, email);
       setStep('success');
-      setTimeout(()=>{
-         window.location.href=url
-      },300)
+      setTimeout(() => {
+        window.location.href = url
+      }, 300)
 
       // toast.success("Transaction Intialized");
-    
+
     } catch (err) {
       setStep('details');
       toast.error("Payment failed. Please try again.");
@@ -480,14 +589,14 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[150] flex items-center justify-center px-4">
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
             onClick={onClose}
           />
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -515,8 +624,8 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                 <form onSubmit={handleEmailSubmit} className="space-y-6">
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">Email Address</label>
-                    <input 
-                      type="email" 
+                    <input
+                      type="email"
                       required
                       placeholder="you@example.com"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#01B2FE] focus:ring-2 focus:ring-[#b3ecff] outline-none transition-all font-medium"
@@ -539,29 +648,29 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                     <div className="grid grid-cols-2 gap-4">
                       <div className="col-span-2 sm:col-span-1">
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">First Name</label>
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           required
                           className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#01B2FE] outline-none font-medium"
                           value={formData.first_name}
-                          onChange={(e) => setFormData({...formData, first_name: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, first_name: e.target.value })}
                         />
                       </div>
                       <div className="col-span-2 sm:col-span-1">
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Last Name</label>
-                        <input 
-                          type="text" 
+                        <input
+                          type="text"
                           className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#01B2FE] outline-none font-medium"
                           value={formData.last_name}
-                          onChange={(e) => setFormData({...formData, last_name: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, last_name: e.target.value })}
                         />
                       </div>
                       <div className="col-span-2">
                         <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Gender</label>
-                        <select 
+                        <select
                           className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#01B2FE] outline-none font-medium bg-white"
                           value={formData.gender}
-                          onChange={(e) => setFormData({...formData, gender: e.target.value})}
+                          onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
                         >
                           <option value="male">Male</option>
                           <option value="female">Female</option>
@@ -580,33 +689,32 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                         { code: 'OFFER_2', name: 'Offer 2 ($360.00)' },
                         { code: 'OFFER_3', name: 'Offer 3 ($42.00)' },
                         {
-                            code: 'OFFER_4',
-                            name: 'Offer 4 ($754.80)'
+                          code: 'OFFER_4',
+                          name: 'Offer 4 ($754.80)'
                         },
                         {
-                            code: 'UNLIMITED_PROJECT_ACCESS',
-                            name: 'Unlimited Project Access ($3000)'
+                          code: 'UNLIMITED_PROJECT_ACCESS',
+                          name: 'Unlimited Project Access ($3000)'
                         },
                         {
-                            code: 'UNLIMITED_MARKETING_ACCESS',
-                            name: 'Unlimited Marketing Access ($3000)'
+                          code: 'UNLIMITED_MARKETING_ACCESS',
+                          name: 'Unlimited Marketing Access ($3000)'
                         },
                         { code: 'CREATORS_PACK', name: 'Creator\'s Pack ($2000)' }
                       ].map((pkg) => (
-                        <label 
-                          key={pkg.code} 
-                          className={`flex items-center p-3 border rounded-xl cursor-pointer transition-all ${
-                            formData.package_code === pkg.code 
-                              ? 'border-[#01B2FE] bg-[#e6f7ff] ring-1 ring-[#01B2FE]' 
-                              : 'border-slate-200 hover:border-[#b3ecff]'
-                          }`}
+                        <label
+                          key={pkg.code}
+                          className={`flex items-center p-3 border rounded-xl cursor-pointer transition-all ${formData.package_code === pkg.code
+                            ? 'border-[#01B2FE] bg-[#e6f7ff] ring-1 ring-[#01B2FE]'
+                            : 'border-slate-200 hover:border-[#b3ecff]'
+                            }`}
                         >
-                          <input 
-                            type="radio" 
-                            name="package" 
-                            className="hidden" 
+                          <input
+                            type="radio"
+                            name="package"
+                            className="hidden"
                             checked={formData.package_code === pkg.code}
-                            onChange={() => setFormData({...formData, package_code: pkg.code})}
+                            onChange={() => setFormData({ ...formData, package_code: pkg.code })}
                           />
                           <div className={`w-5 h-5 rounded-full border flex items-center justify-center mr-3 ${formData.package_code === pkg.code ? 'border-[#01B2FE] bg-[#01B2FE]' : 'border-slate-300'}`}>
                             {formData.package_code === pkg.code && <Check size={12} className="text-white" />}
@@ -645,7 +753,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                     {formData.package_code === 'FREEMIUM' ? 'Subscription Successful!' : 'Pre-order Payment initialized'}
                   </h3>
                   <p className="text-slate-500 mb-8 max-w-xs mx-auto">
-                    {formData.package_code === 'FREEMIUM' 
+                    {formData.package_code === 'FREEMIUM'
                       ? `You have successfully subscribed to the Freemium plan. We'll send a confirmation email to ${email}.`
                       : `We'll send a confirmation email to ${email} after payment.`
                     }
@@ -656,17 +764,17 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                 </div>
               )}
             </div>
-            
+
             {/* Footer for steps */}
             {step !== 'success' && step !== 'payment' && (
-               <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500">
-                 <div className="flex items-center gap-1">
-                   {/* <Lock size={12} /> Secure 256-bit SSL Encrypted */}
-                 </div>
-                 {step === 'details' && (
-                   <button onClick={() => setStep('email')} className="text-slate-400 hover:text-slate-600">Back</button>
-                 )}
-               </div>
+              <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500">
+                <div className="flex items-center gap-1">
+                  {/* <Lock size={12} /> Secure 256-bit SSL Encrypted */}
+                </div>
+                {step === 'details' && (
+                  <button onClick={() => setStep('email')} className="text-slate-400 hover:text-slate-600">Back</button>
+                )}
+              </div>
             )}
           </motion.div>
         </div>
@@ -691,16 +799,23 @@ const Features = () => {
   return (
     <Section id="features" className="bg-slate-50">
       <div className="max-w-7xl mx-auto px-2">
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
+        <Reveal className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
           <Badge>Core Features</Badge>
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Expressively <span className="text-[#01B2FE]">Loud.</span></h2>
           <p className="text-slate-600 text-sm md:text-lg px-4 font-medium">Giving African voices expression into the deepest fabrics of the world.</p>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 md:gap-8">
+        </Reveal>
+        <motion.div
+          variants={ANIMATION_VARIANTS.container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 md:gap-8"
+        >
           {features.map((f, i) => (
-            <motion.div 
+            <motion.div
               key={i}
-              whileHover={{ y: -5 }}
+              variants={ANIMATION_VARIANTS.item}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
               className="p-5 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300"
             >
               <div className="w-10 h-10 md:w-14 md:h-14 bg-[#e6f7ff] rounded-xl md:rounded-2xl flex items-center justify-center mb-5">
@@ -710,7 +825,7 @@ const Features = () => {
               <p className="text-slate-500 text-[10px] md:text-sm leading-relaxed">{f.desc}</p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </Section>
   );
@@ -852,25 +967,26 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
   ];
 
   const onSwiper = (swiper: SwiperType) => {
-  console.log(swiper.activeIndex);
-};
+    console.log(swiper.activeIndex);
+  };
 
 
   return (
     <Section id="pricing" className="bg-white">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center">
+        <Reveal className="text-center mb-16">
           <Badge>Pre-order & Reserve</Badge>
           <h2 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Invest in Your <span className="text-[#01B2FE]">Prosperity.</span></h2>
           <p className="text-slate-500 text-sm md:text-lg mb-10 max-w-xl mx-auto px-4 font-medium">
             Lock in early-bird rates and priority access. Official launch coming soon.
           </p>
-        </div>
+        </Reveal>
 
 
+        <Reveal delay={0.2}>
           <Swiper
             onSwiper={onSwiper}
-             navigation={true}
+            navigation={true}
             spaceBetween={40}
             breakpoints={{
               320: {
@@ -896,54 +1012,54 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
                     boxShadow: "0 25px 50px -12px rgba(1, 178, 254, 0.15)",
                     borderColor: "rgba(1, 178, 254, 0.4)"
                   }}
-                   className={`p-8 md:p-10 rounded-[2.5rem] border-2
-    flex flex-col h-full w-full md:w-96
-    transition-all duration-500 relative
-    ${
-      plan.highlight
-        ? 'bg-slate-900 text-white border-[#01B2FE] shadow-2xl'
-        : 'bg-white text-slate-900 border-slate-100'
-    }
-  `}
-            >
-              {/* {plan.highlight && (
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-500 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
-                  Most Popular
-                </div>
-              )} */}
-
-              <div className="">
-                <h3 className="text-2xl font-black mb-2">{plan.name}</h3>
-                <div className="flex items-baseline gap-1 mb-4">
-                  <span className="text-4xl font-black tracking-tighter">
-                    ${plan.price}
-                  </span>
-                </div>
-                <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.description}</p>
-                <p className={`text-xs mt-2 ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.priceDetails}</p>
-              </div>
-
-              <div className="space-y-4 mb-10 flex-1">
-                {plan.features.map((feature, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <Check size={18} className={plan.highlight ? 'text-[#01B2FE]' : 'text-[#01B2FE]'} />
-                    <span className={`text-sm font-bold ${plan.highlight ? 'text-slate-200' : 'text-slate-700'}`}>{feature}</span>
+                  className={`p-8 md:p-10 rounded-[2.5rem] border-2
+      flex flex-col h-full w-full md:w-96
+      transition-all duration-500 relative
+      ${plan.highlight
+                      ? 'bg-slate-900 text-white border-[#01B2FE] shadow-2xl'
+                      : 'bg-white text-slate-900 border-slate-100'
+                    }
+    `}
+                >
+                  {/* {plan.highlight && (
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-amber-500 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg">
+                    Most Popular
                   </div>
-                ))}
-              </div>
+                )} */}
 
-              <Button 
-                variant={plan.buttonVariant} 
-                className="w-full text-xs uppercase tracking-widest py-4 group"
-                icon={ShoppingCart}
-                onClick={plan.name === 'FREEMIUM' ? onOpenPreorder : onOpenPreorder}
-              >
-                {plan.name === 'FREEMIUM' ? 'Get Started' : 'Pre-order Now'}
-              </Button>
-            </motion.div>
-            </SwiperSlide>
-          ))}
+                  <div className="">
+                    <h3 className="text-2xl font-black mb-2">{plan.name}</h3>
+                    <div className="flex items-baseline gap-1 mb-4">
+                      <span className="text-4xl font-black tracking-tighter">
+                        ${plan.price}
+                      </span>
+                    </div>
+                    <p className={`text-sm leading-relaxed ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.description}</p>
+                    <p className={`text-xs mt-2 ${plan.highlight ? 'text-slate-400' : 'text-slate-500'}`}>{plan.priceDetails}</p>
+                  </div>
+
+                  <div className="space-y-4 mb-10 flex-1">
+                    {plan.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <Check size={18} className={plan.highlight ? 'text-[#01B2FE]' : 'text-[#01B2FE]'} />
+                        <span className={`text-sm font-bold ${plan.highlight ? 'text-slate-200' : 'text-slate-700'}`}>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button
+                    variant={plan.buttonVariant}
+                    className="w-full text-xs uppercase tracking-widest py-4 group"
+                    icon={ShoppingCart}
+                    onClick={plan.name === 'FREEMIUM' ? onOpenPreorder : onOpenPreorder}
+                  >
+                    {plan.name === 'FREEMIUM' ? 'Get Started' : 'Pre-order Now'}
+                  </Button>
+                </motion.div>
+              </SwiperSlide>
+            ))}
           </Swiper>
+        </Reveal>
 
       </div>
     </Section>
@@ -955,7 +1071,7 @@ const StoryAndVision = () => {
     <Section id="story" className="bg-white">
       <div className="max-w-7xl mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <div className="order-2 lg:order-1">
+          <Reveal className="order-2 lg:order-1">
             <Badge>Our Mission</Badge>
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Why LOUD! Matters</h2>
             <p className="text-slate-600 text-base md:text-xl leading-relaxed mb-6 font-medium">
@@ -964,24 +1080,28 @@ const StoryAndVision = () => {
             <p className="text-slate-600 text-base md:text-xl leading-relaxed font-medium">
               Loud is built to give expression and sound Loud into the deepest fabrics of the world.
             </p>
-          </div>
+          </Reveal>
 
-          <motion.div 
-             whileHover={{ scale: 1.02 }}
-             className="order-1 lg:order-2 bg-[#00567a] rounded-[2rem] md:rounded-[3rem] p-8 md:p-14 text-white relative overflow-hidden shadow-2xl"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8 }}
+            whileHover={{ scale: 1.02 }}
+            className="order-1 lg:order-2 bg-[#00567a] rounded-[2rem] md:rounded-[3rem] p-8 md:p-14 text-white relative overflow-hidden shadow-2xl"
           >
-             <div className="absolute top-0 right-0 w-48 md:w-80 h-48 md:h-80 bg-[#01B2FE]/30 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/3" />
-             <div className="relative z-10">
-               <div className="w-12 h-1 bg-[#01B2FE] mb-8" />
-               <h3 className="text-2xl md:text-4xl font-black mb-6 leading-tight">"Creating an infrastructure of shared prosperity."</h3>
-               <p className="text-sm md:text-lg text-[#e6f7ff] font-bold uppercase tracking-widest mb-10">The Vision</p>
-               <div className="flex items-center gap-4">
-                 <div className="h-2 flex-1 bg-[#00344a] rounded-full overflow-hidden">
-                   <div className="h-full w-[85%] bg-[#01B2FE] rounded-full" />
-                 </div>
-                 <span className="text-[10px] font-black text-[#01B2FE] uppercase tracking-widest">Active</span>
-               </div>
-             </div>
+            <div className="absolute top-0 right-0 w-48 md:w-80 h-48 md:h-80 bg-[#01B2FE]/30 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/3" />
+            <div className="relative z-10">
+              <div className="w-12 h-1 bg-[#01B2FE] mb-8" />
+              <h3 className="text-2xl md:text-4xl font-black mb-6 leading-tight">"Creating an infrastructure of shared prosperity."</h3>
+              <p className="text-sm md:text-lg text-[#e6f7ff] font-bold uppercase tracking-widest mb-10">The Vision</p>
+              <div className="flex items-center gap-4">
+                <div className="h-2 flex-1 bg-[#00344a] rounded-full overflow-hidden">
+                  <div className="h-full w-[85%] bg-[#01B2FE] rounded-full" />
+                </div>
+                <span className="text-[10px] font-black text-[#01B2FE] uppercase tracking-widest">Active</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -1002,16 +1122,25 @@ const GrowthStrategy = () => {
   return (
     <Section id="growth" className="bg-slate-900 text-white">
       <div className="max-w-7xl mx-auto px-4 text-center">
-        <Badge>Scalability</Badge>
-        <h2 className="text-3xl md:text-6xl font-black mb-6 tracking-tighter">Growth Roadmap</h2>
-        <p className="text-slate-400 text-sm md:text-xl max-w-2xl mx-auto mb-16 font-medium">
-          Our path to IPO is robust. We are open to strategic partnerships that fuel our vision for a digital Africa.
-        </p>
+        <Reveal>
+          <Badge>Scalability</Badge>
+          <h2 className="text-3xl md:text-6xl font-black mb-6 tracking-tighter">Growth Roadmap</h2>
+          <p className="text-slate-400 text-sm md:text-xl max-w-2xl mx-auto mb-16 font-medium">
+            Our path to IPO is robust. We are open to strategic partnerships that fuel our vision for a digital Africa.
+          </p>
+        </Reveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
+        <motion.div
+          variants={ANIMATION_VARIANTS.container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6"
+        >
           {strategies.map((s, i) => (
-            <motion.div 
+            <motion.div
               key={i}
+              variants={ANIMATION_VARIANTS.item}
               whileHover={{ y: -5 }}
               className="p-6 md:p-8 bg-white/5 rounded-2xl md:rounded-3xl border border-white/10 flex flex-col items-center gap-4 hover:bg-white/10 transition-colors"
             >
@@ -1021,7 +1150,7 @@ const GrowthStrategy = () => {
               <span className="font-black text-[10px] md:text-xs uppercase tracking-[0.2em]">{s.label}</span>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </Section>
   );
@@ -1042,29 +1171,35 @@ const Team = () => {
   return (
     <Section id="team" className="bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16 md:mb-24">
+        <Reveal className="text-center mb-16 md:mb-24">
           <h2 className="text-3xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">Our Leadership</h2>
           <p className="text-slate-500 text-base md:text-xl max-w-2xl mx-auto font-medium">
             Over 50 years of collective expertise in technology, law, and market management.
           </p>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10">
+        </Reveal>
+        <motion.div
+          variants={ANIMATION_VARIANTS.container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10"
+        >
           {team.map((member, i) => (
-            <div key={i} className="group relative">
+            <motion.div variants={ANIMATION_VARIANTS.item} key={i} className="group relative">
               <div className="aspect-[4/5] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden bg-slate-100 mb-4 shadow-sm group-hover:shadow-xl transition-all border border-slate-50">
-                <img 
-                  src={member.img} 
-                  alt={member.name} 
-                  className="w-full h-full object-cover transition-all duration-500"
+                <img
+                  src={member.img}
+                  alt={member.name}
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
                 />
               </div>
               <div className="text-center px-2">
                 <h3 className="text-sm md:text-lg font-black text-slate-900 leading-tight mb-1">{member.name}</h3>
                 <p className="text-[9px] md:text-xs text-[#01B2FE] font-bold uppercase tracking-widest">{member.role}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </Section>
   );
@@ -1083,18 +1218,18 @@ const Footer = () => (
             Giving expression to African voices and letting them sound Loud in the global market.
           </p>
           <div className="flex justify-center md:justify-start gap-4">
-             <a href="https://whatsapp.com/channel/0029VbBPWHuLikg8UnhPvF1r" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all">
-               <MessageCircle className="w-5 h-5" />
-             </a>
-             <a href="mailto:support@loudproductslimited.com" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#01B2FE] hover:text-white transition-all">
-               <Mail className="w-5 h-5" />
-             </a>
-             <a href="https://www.linkedin.com/company/loud-products-limited1/" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
-               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-             </a>
+            <a href="https://whatsapp.com/channel/0029VbBPWHuLikg8UnhPvF1r" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all">
+              <MessageCircle className="w-5 h-5" />
+            </a>
+            <a href="mailto:support@loudproductslimited.com" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#01B2FE] hover:text-white transition-all">
+              <Mail className="w-5 h-5" />
+            </a>
+            <a href="https://www.linkedin.com/company/loud-products-limited1/" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
           </div>
         </div>
-        
+
         <div className="text-center md:text-left">
           <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Contact</h4>
           <ul className="space-y-6 text-sm font-bold">
@@ -1117,9 +1252,9 @@ const Footer = () => (
             <li><a href="#growth" className="hover:text-[#01B2FE] transition-colors">Roadmap</a></li>
           </ul>
         </div>
-        
-        <div>
-          <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8 text-center md:text-left">Get Involved</h4>
+
+        <div className="text-center md:text-left">
+          <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Get Involved</h4>
           <div className="flex flex-col gap-3">
             <input type="email" placeholder="Email for updates" className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 w-full text-sm outline-none focus:ring-2 focus:ring-[#01B2FE] transition-all text-white font-medium" />
             <Button variant="primary" className="w-full text-xs uppercase tracking-widest">Sign-up</Button>
@@ -1135,17 +1270,17 @@ const Footer = () => (
 );
 
 const mockVerifyTransaction = async (reference: string): Promise<string> => {
-  
+
   return new Promise((resolve, reject) => {
-       if(!reference) return;
+    if (!reference) return;
     fetch(`${backend_url}/api/paystack/verify/${reference}`)
       .then(res => res.json())
       .then(data => {
         console.log(data);
-        if(data.status === 'success'){
+        if (data.status === 'success') {
           toast.success("Payment verified successfully!");
           resolve(data.email)
-        
+
         } else {
           toast.error("Payment verification failed.");
         }
@@ -1165,10 +1300,10 @@ const PreorderVerificationModal = ({ isOpen, onClose }: { isOpen: boolean; onClo
 
   useEffect(() => {
     if (isOpen) {
-     
- 
-       const params = new URLSearchParams(window.location.search);
-    const reference = params.get('reference');
+
+
+      const params = new URLSearchParams(window.location.search);
+      const reference = params.get('reference');
 
 
       if (reference) {
@@ -1193,14 +1328,14 @@ const PreorderVerificationModal = ({ isOpen, onClose }: { isOpen: boolean; onClo
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-[160] flex items-center justify-center px-4">
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: 1 }} 
-            exit={{ opacity: 0 }} 
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="absolute inset-0 bg-slate-900/70 backdrop-blur-md"
             onClick={onClose}
           />
-          <motion.div 
+          <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
@@ -1208,41 +1343,41 @@ const PreorderVerificationModal = ({ isOpen, onClose }: { isOpen: boolean; onClo
           >
             {status === 'verifying' && (
               <div className="py-12">
-                 <div className="w-16 h-16 border-4 border-[#b3ecff] border-t-[#01B2FE] rounded-full animate-spin mx-auto mb-6"/>
-                 <h3 className="text-xl font-bold text-slate-900 mb-2">Verifying Transaction...</h3>
-                 <p className="text-slate-500 text-sm">Please wait while we confirm your preorder.</p>
+                <div className="w-16 h-16 border-4 border-[#b3ecff] border-t-[#01B2FE] rounded-full animate-spin mx-auto mb-6" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Verifying Transaction...</h3>
+                <p className="text-slate-500 text-sm">Please wait while we confirm your preorder.</p>
               </div>
             )}
 
             {status === 'success' && (
               <div className="py-8">
-                 <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
-                    <Check size={40} />
-                 </div>
-                 <h3 className="text-2xl font-black text-slate-900 mb-2">Pre-order Verified!</h3>
-                 <p className="text-slate-500 mb-8">
+                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-green-500/20">
+                  <Check size={40} />
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 mb-2">Pre-order Verified!</h3>
+                <p className="text-slate-500 mb-8">
                   Your payment for the pre-order has been successfully confirmed
                   <span className="font-bold text-slate-900"> {email} </span>.
                   Check your email for your receipt and further instructions.
                 </p>
-                 <Button variant="primary" className="w-full" onClick={onClose}>
-                   Ok
-                 </Button>
+                <Button variant="primary" className="w-full" onClick={onClose}>
+                  Ok
+                </Button>
               </div>
             )}
 
             {status === 'error' && (
               <div className="py-8">
-                 <div className="w-20 h-20 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <XCircle size={40} />
-                 </div>
-                 <h3 className="text-2xl font-black text-slate-900 mb-2">Verification Failed</h3>
-                 <p className="text-slate-500 mb-8">
-                   We couldn't verify this transaction reference. It may be invalid or expired.
-                 </p>
-                 <Button variant="secondary" className="w-full" onClick={onClose}>
-                   Close
-                 </Button>
+                <div className="w-20 h-20 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <XCircle size={40} />
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 mb-2">Verification Failed</h3>
+                <p className="text-slate-500 mb-8">
+                  We couldn't verify this transaction reference. It may be invalid or expired.
+                </p>
+                <Button variant="secondary" className="w-full" onClick={onClose}>
+                  Close
+                </Button>
               </div>
             )}
           </motion.div>
@@ -1295,47 +1430,46 @@ const Benefits = () => {
   return (
     <Section id="benefits" className="bg-slate-50">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
+        <Reveal className="text-center mb-12">
           <Badge>Unlock Your Potential</Badge>
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6">Who is LOUD! For?</h2>
           <p className="text-slate-600 max-w-2xl mx-auto text-lg">
             Tailored benefits for every player in the African digital economy.
           </p>
-        </div>
+        </Reveal>
 
         {/* Tabs */}
-        <div className="flex justify-center mb-16">
+        <Reveal delay={0.2} className="flex justify-center mb-16">
           <div className="inline-flex bg-white p-2 rounded-2xl shadow-sm border border-slate-100 gap-2 overflow-x-auto max-w-full">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center px-6 py-3 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
-                  activeTab === tab.id 
-                    ? 'bg-[#01B2FE] text-white shadow-lg shadow-indigo-200' 
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
-                }`}
+                className={`flex items-center px-6 py-3 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${activeTab === tab.id
+                  ? 'bg-[#01B2FE] text-white shadow-lg shadow-indigo-200'
+                  : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                  }`}
               >
                 <tab.icon size={18} className="mr-2" />
                 {tab.label}
               </button>
             ))}
           </div>
-        </div>
+        </Reveal>
 
         {/* Content Grid */}
         <div className="min-h-[400px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
+              variants={ANIMATION_VARIANTS.container}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0, y: -20, transition: { duration: 0.2 } }}
               className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {content[activeTab].map((item, i) => (
-                <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-lg hover:border-indigo-100 transition-all group">
+                <motion.div variants={ANIMATION_VARIANTS.item} key={i} className="bg-white p-6 rounded-2xl border border-slate-100 hover:shadow-lg hover:border-indigo-100 transition-all group">
                   <div className="flex items-start gap-4">
                     <div className="w-12 h-12 rounded-xl bg-indigo-50 text-[#01B2FE] flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                       <item.icon size={24} />
@@ -1345,7 +1479,7 @@ const Benefits = () => {
                       <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </motion.div>
           </AnimatePresence>
@@ -1360,7 +1494,7 @@ const Benefits = () => {
 
 const HowItWorks = () => {
 
-   const [activeTab, setActiveTab] = useState<'contractors' | 'clients'>('clients');
+  const [activeTab, setActiveTab] = useState<'contractors' | 'clients'>('clients');
 
   const tabs = [
     { id: 'clients', label: 'Clients & Govt', icon: Globe },
@@ -1375,14 +1509,14 @@ const HowItWorks = () => {
       pill: "Step 1"
     },
     {
-       title: "Promote a Project",
-        desc: "Boost visibility by promoting your project to reach more contractors.",
+      title: "Promote a Project",
+      desc: "Boost visibility by promoting your project to reach more contractors.",
       image: "/assets/img/works2.png",
       pill: "Step 2"
     },
     {
-     title: "Submit Project for Discovery",
-        desc: "Submit your project to be discovered by qualified contractors on the platform.",
+      title: "Submit Project for Discovery",
+      desc: "Submit your project to be discovered by qualified contractors on the platform.",
       image: "/assets/img/works3.png",
       pill: "Step 3"
     }
@@ -1391,19 +1525,19 @@ const HowItWorks = () => {
   const steps2 = [
     {
       title: "Discover Projects",
-        desc: "Browse and explore available projects that match your expertise.",
+      desc: "Browse and explore available projects that match your expertise.",
       image: "/assets/img/works4.png",
       pill: "Step 1"
     },
     {
       title: "Submit Project Bid",
-        desc: "Place a bid confidently and communicate your value to the project owner.",
+      desc: "Place a bid confidently and communicate your value to the project owner.",
       image: "/assets/img/works5.png",
       pill: "Step 2"
     },
     {
       title: "Contract Award",
-        desc: "Successful bids are reviewed and contracts are awarded.",
+      desc: "Successful bids are reviewed and contracts are awarded.",
       image: "/assets/img/works6.png",
       pill: "Step 3"
     }
@@ -1414,99 +1548,100 @@ const HowItWorks = () => {
   return (
     <Section id="how-it-works" className="bg-white">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-16 md:mb-24">
+        <Reveal className="text-center mb-16 md:mb-24">
           <Badge>Simple Process</Badge>
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">How <span className="text-[#01B2FE]">LOUD!</span> Works</h2>
           <p className="text-slate-600 text-base md:text-xl max-w-2xl mx-auto font-medium">
             We've simplified complex systems into three easy steps.
           </p>
-        </div>
+        </Reveal>
 
-         {/* Tabs */}
-        <div className="flex justify-center mb-16">
+        {/* Tabs */}
+        <Reveal delay={0.2} className="flex justify-center mb-16">
           <div className="inline-flex bg-white p-2 rounded-2xl shadow-sm border border-slate-100 gap-2 overflow-x-auto max-w-full">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center px-6 py-3 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
-                  activeTab === tab.id 
-                    ? 'bg-[#01B2FE] text-white shadow-lg shadow-indigo-200' 
-                    : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
-                }`}
+                className={`flex items-center px-6 py-3 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${activeTab === tab.id
+                  ? 'bg-[#01B2FE] text-white shadow-lg shadow-indigo-200'
+                  : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                  }`}
               >
                 <tab.icon size={18} className="mr-2" />
                 {tab.label}
               </button>
             ))}
           </div>
-        </div>
+        </Reveal>
 
 
         <div className="space-y-16 md:space-y-24">
-          {activeTab==='clients' ? steps.map((step, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
-            >
-              {/* Image Side */}
-              <div className="w-full md:w-1/2 relative group">
-                <div className="absolute inset-0 bg-[#01B2FE] rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20 blur-xl" />
-                <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] border border-slate-100">
-                  <img 
-                    src={step.image} 
-                    alt={step.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  {/* Floating Pill */}
-                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#01B2FE] shadow-lg border border-white/50">
-                    {step.pill}
+          <AnimatePresence mode="wait">
+            {activeTab === 'clients' ? steps.map((step, index) => (
+              <motion.div
+                key={`client-${index}`}
+                initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+              >
+                {/* Image Side */}
+                <div className="w-full md:w-1/2 relative group">
+                  <div className="absolute inset-0 bg-[#01B2FE] rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20 blur-xl" />
+                  <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] border border-slate-100">
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    {/* Floating Pill */}
+                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#01B2FE] shadow-lg border border-white/50">
+                      {step.pill}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Text Side */}
-              <div className="w-full md:w-1/2">
-                <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-4">{step.title}</h3>
-                <p className="text-slate-600 text-lg leading-relaxed">{step.desc}</p>
-              </div>
-            </motion.div>
-          )) : steps2.map((step, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
-            >
-              {/* Image Side */}
-              <div className="w-full md:w-1/2 relative group">
-                <div className="absolute inset-0 bg-[#01B2FE] rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20 blur-xl" />
-                <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] border border-slate-100">
-                  <img 
-                    src={step.image} 
-                    alt={step.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  {/* Floating Pill */}
-                  <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#01B2FE] shadow-lg border border-white/50">
-                    {step.pill}
+                {/* Text Side */}
+                <div className="w-full md:w-1/2">
+                  <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-4">{step.title}</h3>
+                  <p className="text-slate-600 text-lg leading-relaxed">{step.desc}</p>
+                </div>
+              </motion.div>
+            )) : steps2.map((step, index) => (
+              <motion.div
+                key={`contractor-${index}`}
+                initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+              >
+                {/* Image Side */}
+                <div className="w-full md:w-1/2 relative group">
+                  <div className="absolute inset-0 bg-[#01B2FE] rounded-[2rem] rotate-3 group-hover:rotate-6 transition-transform duration-500 opacity-20 blur-xl" />
+                  <div className="relative rounded-[2rem] overflow-hidden shadow-2xl aspect-[4/3] border border-slate-100">
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    {/* Floating Pill */}
+                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-4 py-1 rounded-full text-xs font-black uppercase tracking-widest text-[#01B2FE] shadow-lg border border-white/50">
+                      {step.pill}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Text Side */}
-              <div className="w-full md:w-1/2">
-                <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-4">{step.title}</h3>
-                <p className="text-slate-600 text-lg leading-relaxed">{step.desc}</p>
-              </div>
-            </motion.div>
-          ))}
+                {/* Text Side */}
+                <div className="w-full md:w-1/2">
+                  <h3 className="text-2xl md:text-4xl font-black text-slate-900 mb-4">{step.title}</h3>
+                  <p className="text-slate-600 text-lg leading-relaxed">{step.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </Section>
@@ -1535,7 +1670,7 @@ const Offering = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {offerings.map((offer, i) => (
-            <motion.div 
+            <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1559,18 +1694,29 @@ const Offering = () => {
 const App = () => {
 
   const [isPreorderModalOpen, setPreorderModalOpen] = useState(false);
-
   const [isPreorderModalVerificationOpen, setPreorderModalVerificationOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if(window.location.pathname=="/payment-success"){
+    // Simulate initial loading
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    if (window.location.pathname == "/payment-success") {
       setPreorderModalVerificationOpen(true);
     }
-  },[])
+
+    return () => clearTimeout(timer);
+  }, [])
 
 
   return (
     <div className="font-sans text-slate-900 bg-white selection:bg-[#01B2FE] selection:text-white overflow-x-hidden scroll-smooth">
+      <AnimatePresence>
+        {loading && <LoadingScreen key="loading" />}
+      </AnimatePresence>
+
       <Navbar />
       <main>
         <Hero onOpenPreorder={() => setPreorderModalOpen(true)} />
@@ -1578,13 +1724,13 @@ const App = () => {
         <Features />
         <Benefits />
         <HowItWorks />
-        <Pricing onOpenPreorder={() => setPreorderModalOpen(true)}/>
+        <Pricing onOpenPreorder={() => setPreorderModalOpen(true)} />
         <StoryAndVision />
         <GrowthStrategy />
         <Team />
-        <PreorderVerificationModal isOpen={isPreorderModalVerificationOpen} onClose={()=>setPreorderModalVerificationOpen(false)} />
+        <PreorderVerificationModal isOpen={isPreorderModalVerificationOpen} onClose={() => setPreorderModalVerificationOpen(false)} />
         <PreorderModal isOpen={isPreorderModalOpen} onClose={() => setPreorderModalOpen(false)} />
-        <Toaster  />
+        <Toaster />
       </main>
       <Footer />
     </div>
