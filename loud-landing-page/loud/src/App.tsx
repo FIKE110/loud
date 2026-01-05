@@ -241,9 +241,9 @@ const Hero = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
           className="relative hidden sm:flex items-center justify-center"
         >
           <img 
-            src="/assets/img/about/about-app2.png" 
+            src="/assets/img/heroimg2.png" 
             alt="Loud App on Smartphone"
-            className="w-full max-w-[280px] md:max-w-[320px] lg:max-w-[300px] h-auto object-contain transform transition-transform duration-700 hover:scale-105"
+            className="w-full max-w-[430px] md:max-w-[320px] lg:max-w-[500px] h-auto object-contain transform transition-transform duration-700 hover:scale-105"
             style={{
               filter: 'drop-shadow(0 25px 25px rgba(0,0,0,0.3))'
             }}
@@ -579,7 +579,9 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                         { code: 'OFFER_1', name: 'Offer 1 ($80.40)' },
                         { code: 'OFFER_2', name: 'Offer 2 ($360.00)' },
                         { code: 'OFFER_3', name: 'Offer 3 ($42.00)' },
-                        { code: 'OFFER_4', name: 'Offer 4 ($754.80)' }
+                        { code: 'OFFER_4', name: 'Offer 4 ($754.80)' },
+                        { code: 'UNLIMITED_PROJECT_ACCESS', name: 'Unlimited Project Access ($3000)' },
+                        { code: 'UNLIMITED_MARKETING_ACCESS', name: 'Unlimited Marketing Access ($3000)' }
                       ].map((pkg) => (
                         <label 
                           key={pkg.code} 
@@ -785,6 +787,40 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
         "Receive divined",
         "Instant verification from launch day",
         "Access to all premium features",
+      ],
+      buttonVariant: "priceOutline",
+      highlight: false,
+    },
+    {
+      name: "UNLIMITED PROJECT ACCESS",
+      price: "3000",
+      priceDetails: "Lifetime Subscription",
+      description: "Gain unlimited access to all project-related features for a one-time payment.",
+      features: [
+        "Pre-launch pricing",
+        "Only 100 slots available",
+        "Available till January 20, 2026",
+        "Discover 100% all projects on platform",
+        "Instant verification from launch day",
+        "Bid submission, reminders and search optimization, AI project assist and contract award",
+        "Unlimited project access and bid submission"
+      ],
+      buttonVariant: "primary",
+      highlight: true,
+    },
+    {
+      name: "UNLIMITED MARKETING ACCESS",
+      price: "3000",
+      priceDetails: "Lifetime Subscription",
+      description: "Gain unlimited access to all marketing-related features for a one-time payment.",
+      features: [
+        "Pre-launch pricing",
+        "Only 100 slots available",
+        "Available till January 20, 2026",
+        "Access to all premium marketing features",
+        "Instant verification from launch day",
+        "Direct community access and support",
+        "Monetization from the third month after launch"
       ],
       buttonVariant: "priceOutline",
       highlight: false,
