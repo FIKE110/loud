@@ -5,6 +5,7 @@ import z from "zod";
 import {  schema } from "../schema/initSchema";
 import { findPackagePriceByPackageCode } from "../service/packageService";
 import { usdToNaira } from "../service/utils";
+import { sendMail } from "../service/mailService";
 
 const user = new Hono();
 
@@ -82,6 +83,8 @@ user.post("/register-freemium", async (c) => {
         status: 'PAID',
         payment_reference: "freemium",
       });
+    
+    await sendMail(email,"Welcome to the Loud freemium plan","You have successfully registered for the Loud freemium plan. We are excited to have you onboard.");
 
     return c.json({message:"Successfully registered to freemium"});
   } catch (error: any) {
