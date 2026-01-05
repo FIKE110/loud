@@ -579,9 +579,19 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                         { code: 'OFFER_1', name: 'Offer 1 ($80.40)' },
                         { code: 'OFFER_2', name: 'Offer 2 ($360.00)' },
                         { code: 'OFFER_3', name: 'Offer 3 ($42.00)' },
-                        { code: 'OFFER_4', name: 'Offer 4 ($754.80)' },
-                        { code: 'UNLIMITED_PROJECT_ACCESS', name: 'Unlimited Project Access ($3000)' },
-                        { code: 'UNLIMITED_MARKETING_ACCESS', name: 'Unlimited Marketing Access ($3000)' }
+                        {
+                            code: 'OFFER_4',
+                            name: 'Offer 4 ($754.80)'
+                        },
+                        {
+                            code: 'UNLIMITED_PROJECT_ACCESS',
+                            name: 'Unlimited Project Access ($3000)'
+                        },
+                        {
+                            code: 'UNLIMITED_MARKETING_ACCESS',
+                            name: 'Unlimited Marketing Access ($3000)'
+                        },
+                        { code: 'CREATORS_PACK', name: 'Creator\'s Pack ($2000)' }
                       ].map((pkg) => (
                         <label 
                           key={pkg.code} 
@@ -608,8 +618,9 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                   </div>
 
                   <Button className="w-full mt-6">
-                    {formData.package_code === 'FREEMIUM' ? 'Subscribe' : 'Proceed to Payment'}
+                    {formData.package_code === 'FREEMIUM' ? 'Sign-up' : 'Proceed to Payment'}
                   </Button>
+                  <p className="text-xs text-slate-500 mt-2 text-center">By signing up, you agree to our Terms of Use.</p>
                 </form>
               )}
 
@@ -824,6 +835,19 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       ],
       buttonVariant: "priceOutline",
       highlight: false,
+    },
+    {
+      name: "Creator's Pack",
+      price: "2000",
+      priceDetails: "Lifetime Subscription",
+      description: "A special offer for creators to maximize their earnings and visibility.",
+      features: [
+        "Earn 80% of content generated revenue",
+        "Unlimited link use and optimization",
+        "Verification"
+      ],
+      buttonVariant: "primary",
+      highlight: true,
     },
   ];
 
@@ -1098,7 +1122,8 @@ const Footer = () => (
           <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8 text-center md:text-left">Get Involved</h4>
           <div className="flex flex-col gap-3">
             <input type="email" placeholder="Email for updates" className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 w-full text-sm outline-none focus:ring-2 focus:ring-[#01B2FE] transition-all text-white font-medium" />
-            <Button variant="primary" className="w-full text-xs uppercase tracking-widest">Subscribe</Button>
+            <Button variant="primary" className="w-full text-xs uppercase tracking-widest">Sign-up</Button>
+            <p className="text-xs text-slate-500 mt-2">By signing up, you agree to our Terms of Use.</p>
           </div>
         </div>
       </div>
