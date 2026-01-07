@@ -682,8 +682,8 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
 
                   <div className="pt-2">
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Select Package</label>
-                    <div className="grid grid-cols-1 gap-3">
-                      {[
+                    <div className="grid grid-cols-1 gap-3 h-64 overflow-y-auto">
+                      {[ 
                         { code: 'FREEMIUM', name: 'Freemium ($0)' },
                         { code: 'OFFER_1', name: 'Offer 1 ($80.40)' },
                         { code: 'OFFER_2', name: 'Offer 2 ($360.00)' },
@@ -700,7 +700,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                           code: 'UNLIMITED_MARKETING_ACCESS',
                           name: 'Unlimited Marketing Access ($3000)'
                         },
-                        { code: 'CREATORS_PACK', name: 'Creator\'s Pack ($2000)' }
+                        { code: 'CREATORS_PACK', name: "Creator's Pack ($2000)" }
                       ].map((pkg) => (
                         <label
                           key={pkg.code}
@@ -726,9 +726,9 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                   </div>
 
                   <Button className="w-full mt-6">
-                    {formData.package_code === 'FREEMIUM' ? 'Sign-up' : 'Proceed to Payment'}
+                    {formData.package_code === 'FREEMIUM' ? 'Subscribe' : 'Proceed to Payment'}
                   </Button>
-                  <p className="text-xs text-slate-500 mt-2 text-center">By signing up, you agree to our Terms of Use.</p>
+                  <p className="text-xs text-slate-500 mt-2 text-center">By subscribing, you agree to our Terms of Use.</p>
                 </form>
               )}
 
@@ -1158,14 +1158,14 @@ const GrowthStrategy = () => {
 
 const Team = () => {
   const team = [
-    { name: "Sylvester Okafor", role: "Founder & CEO", img: "/assets/img/person.jpg" },
+    { name: "Sylvester Okafor", role: "The Founder & CEO", img: "/assets/img/person.jpg" },
     { name: "Endwell Obinuchi Chinda", role: "Legal Director", img: "/assets/img/person7r.jpg" },
-    { name: "Isaiah Omame", role: "CTO", img: "/assets/img/person6.jpg" },
-    { name: "Godwin Ngusen J.", role: "Engineering Mgr", img: "/assets/img/person1.jpg" },
-    { name: "Stephen O'Meara", role: "Board Chairman", img: "/assets/img/person2.jpg" },
-    { name: "Kaushik GD", role: "Vice Chairman", img: "/assets/img/person4.jpg" },
-    { name: "Vineeta Dixit", role: "Advisor", img: "/assets/img/person5.jpg" },
-    { name: "Vanessa Haripersad", role: "Brand Management", img: "/assets/img/editperson3.jpg" },
+    { name: "Isaiah Omame", role: "Chief Technology Officer (CTO)", img: "/assets/img/person6.jpg" },
+    { name: "Godwin Ngusen J.", role: "Engineering Manager", img: "/assets/img/person1.jpg" },
+    { name: "Stephen O'Meara", role: "Advisory Board Chairman", img: "/assets/img/person2.jpg" },
+    { name: "Kaushik GD", role: "Data Commerce, AI & Sustainability Vice Chairman, Advisory Board", img: "/assets/img/person4.jpg" },
+    { name: "Vineeta Dixit", role: "Public Policy and Government Affairs, Spotify Advisor", img: "/assets/img/person5.jpg" },
+    { name: "Vanessa Haripersad", role: "Brand Management and Leadership", img: "/assets/img/editperson3.jpg" },
   ];
 
   return (
@@ -1205,69 +1205,115 @@ const Team = () => {
   );
 };
 
-const Footer = () => (
-  <footer className="bg-slate-950 text-slate-400 pt-20 pb-10 border-t border-white/5">
-    <div className="max-w-7xl mx-auto px-4 sm:px-6">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
-        <div className="text-center md:text-left">
-          <div className="flex items-center justify-center md:justify-start gap-2 mb-8 text-white">
-            <div className="w-10 h-10 bg-[#01B2FE] rounded-xl flex items-center justify-center font-black text-xl">L</div>
-            <span className="text-2xl font-black">LOUD<span className="text-[#01B2FE]">!</span></span>
+const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubscription = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.includes('@')) {
+      toast.error("A valid Email is required");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch(`${backend_url}/api/subscription`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Something went wrong');
+      }
+
+      toast.success(data.message);
+      setEmail('');
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <footer className="bg-slate-950 text-slate-400 pt-20 pb-10 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+          <div className="text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-2 mb-8 text-white">
+              <div className="w-10 h-10 bg-[#01B2FE] rounded-xl flex items-center justify-center font-black text-xl">L</div>
+              <span className="text-2xl font-black">LOUD<span className="text-[#01B2FE]">!</span></span>
+            </div>
+            <p className="text-sm md:text-base leading-relaxed text-slate-400 mb-8 max-w-xs mx-auto md:mx-0 font-medium">
+              Giving expression to African voices and letting them sound Loud in the global market.
+            </p>
+            <div className="flex justify-center md:justify-start gap-4">
+              <a href="https://whatsapp.com/channel/0029VbBPWHuLikg8UnhPvF1r" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all">
+                <MessageCircle className="w-5 h-5" />
+              </a>
+              <a href="mailto:support@loudproductslimited.com" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#01B2FE] hover:text-white transition-all">
+                <Mail className="w-5 h-5" />
+              </a>
+              <a href="https://www.linkedin.com/company/loud-products-limited1/" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              </a>
+            </div>
           </div>
-          <p className="text-sm md:text-base leading-relaxed text-slate-400 mb-8 max-w-xs mx-auto md:mx-0 font-medium">
-            Giving expression to African voices and letting them sound Loud in the global market.
-          </p>
-          <div className="flex justify-center md:justify-start gap-4">
-            <a href="https://whatsapp.com/channel/0029VbBPWHuLikg8UnhPvF1r" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:text-white transition-all">
-              <MessageCircle className="w-5 h-5" />
-            </a>
-            <a href="mailto:support@loudproductslimited.com" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#01B2FE] hover:text-white transition-all">
-              <Mail className="w-5 h-5" />
-            </a>
-            <a href="https://www.linkedin.com/company/loud-products-limited1/" className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-            </a>
+
+          <div className="text-center md:text-left">
+            <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Contact</h4>
+            <ul className="space-y-6 text-sm font-bold">
+              <li className="flex flex-col md:flex-row items-center gap-3">
+                <Phone className="w-4 h-4 text-[#01B2FE]" />
+                <span>07065427513, 09156094521</span>
+              </li>
+              <li className="flex flex-col md:flex-row items-center gap-3">
+                <Mail className="w-4 h-4 text-[#01B2FE]" />
+                <span>support@loudproductslimited.com</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="hidden md:block">
+            <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Quick Links</h4>
+            <ul className="space-y-4 text-sm font-bold">
+              <li><a href="#story" className="hover:text-[#01B2FE] transition-colors">Our Story</a></li>
+              <li><a href="#pricing" className="hover:text-[#01B2FE] transition-colors">Pre-order</a></li>
+              <li><a href="#growth" className="hover:text-[#01B2FE] transition-colors">Roadmap</a></li>
+            </ul>
+          </div>
+
+          <div className="text-center md:text-left">
+            <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Get Involved</h4>
+            <form onSubmit={handleSubscription} className="flex flex-col gap-3">
+              <input
+                type="email"
+                placeholder="Email for updates"
+                className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 w-full text-sm outline-none focus:ring-2 focus:ring-[#01B2FE] transition-all text-white font-medium"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Button variant="primary" className="w-full text-xs uppercase tracking-widest" disabled={loading}>
+                {loading ? <Loader2 className="animate-spin" /> : 'Subscribe'}
+              </Button>
+              <p className="text-xs text-slate-500 mt-2">By subscribing, you agree to our Terms of Use.</p>
+            </form>
           </div>
         </div>
-
-        <div className="text-center md:text-left">
-          <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Contact</h4>
-          <ul className="space-y-6 text-sm font-bold">
-            <li className="flex flex-col md:flex-row items-center gap-3">
-              <Phone className="w-4 h-4 text-[#01B2FE]" />
-              <span>07065427513, 09156094521</span>
-            </li>
-            <li className="flex flex-col md:flex-row items-center gap-3">
-              <Mail className="w-4 h-4 text-[#01B2FE]" />
-              <span>support@loudproductslimited.com</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="hidden md:block">
-          <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Quick Links</h4>
-          <ul className="space-y-4 text-sm font-bold">
-            <li><a href="#story" className="hover:text-[#01B2FE] transition-colors">Our Story</a></li>
-            <li><a href="#pricing" className="hover:text-[#01B2FE] transition-colors">Pre-order</a></li>
-            <li><a href="#growth" className="hover:text-[#01B2FE] transition-colors">Roadmap</a></li>
-          </ul>
-        </div>
-
-        <div className="text-center md:text-left">
-          <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Get Involved</h4>
-          <div className="flex flex-col gap-3">
-            <input type="email" placeholder="Email for updates" className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 w-full text-sm outline-none focus:ring-2 focus:ring-[#01B2FE] transition-all text-white font-medium" />
-            <Button variant="primary" className="w-full text-xs uppercase tracking-widest">Sign-up</Button>
-            <p className="text-xs text-slate-500 mt-2">By signing up, you agree to our Terms of Use.</p>
-          </div>
+        <div className="border-t border-white/5 pt-10 text-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">
+          <p>© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
+          <p className="mt-2">This product is protected by U.S. patents. For more information, please visit <a href="/patents" className="underline">loudproductlimited.com/patents</a>.</p>
         </div>
       </div>
-      <div className="border-t border-white/5 pt-10 text-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">
-        <p>© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
-      </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 const mockVerifyTransaction = async (reference: string): Promise<string> => {
 

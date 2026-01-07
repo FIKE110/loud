@@ -11,6 +11,7 @@ import { InitializeRequestBody } from './schema/initSchema'
     users: UserTable
     user_preorders: UserPreorderTable
     packages: PackageTable
+    subscription: SubscriptionTable
     }
 
     export interface UserTable {
@@ -50,3 +51,14 @@ export type PreorderUpdate = Updateable<UserPreorderTable>
 export type Package = Selectable<PackageTable>
 export type NewPackage = Insertable<PackageTable>
 export type PackageUpdate = Updateable<PackageTable>
+
+export interface SubscriptionTable {
+    id: Generated<number>
+    name: string | undefined
+    email: string
+    created_at: ColumnType<Date, string | undefined, never>
+    }
+
+export type Subscription = Selectable<SubscriptionTable>
+export type NewSubscription = Insertable<SubscriptionTable>
+export type SubscriptionUpdate = Updateable<SubscriptionTable>

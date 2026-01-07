@@ -4,12 +4,14 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "bun --watch src/index.ts"
+    "dev": "bun --watch src/index.ts",
+    "migrate": "bun scripts/migrate.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hono/zod-validator": "^0.7.6",
     "hono": "^4.11.1",
     "kysely": "^0.28.9",
     "nodemailer": "^7.0.12",

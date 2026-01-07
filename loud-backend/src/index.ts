@@ -5,6 +5,7 @@ import paystack from './paystack';
 import user from './user';
 import webhook from './webhook';
 import { sendMail } from './service/mailService';
+import subscription from './subscription';
 
 const app = new Hono();
 
@@ -19,5 +20,6 @@ app.use(logger());
 app.route('/api/paystack', paystack);
 app.route('/api/user', user);
 app.route('/api/v1/payment/webhook/paystack', webhook);
+app.route('/api/subscription', subscription);
 
 export default app;
