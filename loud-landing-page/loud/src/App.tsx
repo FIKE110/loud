@@ -188,11 +188,8 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 md:w-10 md:h-10 bg-[#01B2FE] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">
-            L
-          </div>
-          <span className={`text-xl md:text-2xl font-black tracking-tighter transition-colors ${isScrolled ? 'text-slate-900' : ' text-white'}`}>
-            LOUD<span className="text-[#01B2FE]">!</span>
+          <span className={`text-2xl font-black tracking-tighter text-[#01B2FE]`}>
+            LOUD<span className={`${isScrolled ? 'text-slate-900' : 'text-white'}`}>!</span>
           </span>
         </a>
 
@@ -1317,8 +1314,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-8 text-white">
-              <div className="w-10 h-10 bg-[#01B2FE] rounded-xl flex items-center justify-center font-black text-xl">L</div>
-              <span className="text-2xl font-black">LOUD<span className="text-[#01B2FE]">!</span></span>
+              <span className="text-2xl font-black text-[#01B2FE]">LOUD<span className="text-white">!</span></span>
             </div>
             <p className="text-sm md:text-base leading-relaxed text-slate-400 mb-8 max-w-xs mx-auto md:mx-0 font-medium">
               Giving expression to African voices and letting them sound Loud in the global market.

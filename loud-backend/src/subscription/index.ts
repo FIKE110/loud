@@ -3,7 +3,7 @@ import { Hono } from 'hono'
 import { z } from 'zod'
 import { zValidator } from '@hono/zod-validator'
 import { createSubscription, findSubscriptionByEmail } from '../service/subscriptionService'
-import { sendMail } from '../service/mailService'
+import { sendWelcomeMail } from '../service/mailService'
 
 const subscription = new Hono()
 
@@ -26,10 +26,8 @@ subscription.post(
         }
 
         const newSubscription = await createSubscription({ email })
-        await sendMail(
+        await sendWelcomeMail(
             email,
-            'Subscription Confirmation',
-            'Thank you for subscribing to Loud updates! We will keep you informed about our launch and exciting news.'
         )
 
         return c.json({

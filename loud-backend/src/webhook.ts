@@ -3,7 +3,7 @@ import { findUserByEmail } from "./service/userService";
 import crypto from "crypto";
 import { findPreorderByUserId, savePreorder, updatePreorderStatus } from "./service/preorderService";
 import { nairaToUsd, usdToNaira } from "./service/utils";
-import { sendMail } from "./service/mailService";
+import { sendPreorderMail } from "./service/mailService";
 
 const webhook = new Hono();
 
@@ -34,7 +34,7 @@ webhook.post("/2fc6ad05-7137-4504-bc55-63543bfa6535", async (c) => {
         const preorder = await findPreorderByUserId(user.id);
         if (preorder && preorder.status !== 'PAID' && preorder.payment_reference === reference && convertedAmount === usdToNaira(preorder.package_price)) {
           await updatePreorderStatus(user.id, 'PAID');
-          await sendMail(email,"Payment Confirmation for your Loud Pre-order","Your payment for the Loud preorder has been successfully processed. Thank you for your order!");
+          await sendPreorderMail(email, user.first_name);
         }
 
       }
