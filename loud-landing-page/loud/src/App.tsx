@@ -422,6 +422,33 @@ const Hero = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
   );
 };
 
+const VideoSection = () => {
+  return (
+    <Section className="bg-white">
+      <div className="max-w-4xl mx-auto text-center">
+        <Reveal>
+          <Badge>See It In Action</Badge>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
+            Experience LOUD!
+          </h2>
+          <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-10 font-medium">
+            Watch our video to see how LOUD! is changing the game for African entrepreneurs.
+          </p>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <div className="aspect-w-16 aspect-h-9 rounded-2xl overflow-hidden shadow-2xl">
+            <video
+              src="/assets/video/loud-video.mp4"
+              controls
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </Reveal>
+      </div>
+    </Section>
+  );
+};
+
 const ValueProp = () => {
   const stats = [
     { label: "Faster Procurement", value: "95%", desc: "Automating systems for speed" },
@@ -1896,6 +1923,7 @@ const App = () => {
       <Navbar />
       <main>
         <Hero onOpenPreorder={() => setPreorderModalOpen(true)} />
+        <VideoSection />
         <CountdownSection />
         <ValueProp />
         <Features />
