@@ -267,6 +267,74 @@ const Navbar = () => {
   );
 };
 
+const CountdownSection = () => {
+  const targetDate = new Date("2026-02-02T00:00:00");
+
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
+
+  useEffect(() => {
+    const calculateTimeLeft = () => {
+      const difference = +targetDate - +new Date();
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60),
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    const timer = setInterval(calculateTimeLeft, 1000);
+    
+    // Initial call to set time immediately
+    calculateTimeLeft();
+
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  const NumberBox = ({ value, label }: { value: number, label: string }) => (
+    <div className="flex flex-col items-center">
+      <div className="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 shadow-lg">
+        <div className="absolute w-full h-1/2 top-0 bg-black/10"></div>
+        <span className="absolute text-3xl md:text-4xl font-black text-white tracking-tighter">
+          {String(value).padStart(2, '0')}
+        </span>
+      </div>
+      <span className="mt-3 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-slate-400">{label}</span>
+    </div>
+  );
+
+  return (
+    <Section className="bg-slate-900 text-white py-20">
+      <div className="max-w-7xl mx-auto text-center">
+        <Reveal>
+          <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tighter text-white">Countdown to Launch</h2>
+          <p className="text-lg text-slate-400 font-medium mb-10">February 2, 2026</p>
+        </Reveal>
+        <div
+          className="flex items-center justify-center gap-2 md:gap-4"
+        >
+          <NumberBox value={timeLeft.days} label="Days" />
+          <span className="text-3xl md:text-4xl font-black text-white/20 pb-8">:</span>
+          <NumberBox value={timeLeft.hours} label="Hours" />
+          <span className="text-3xl md:text-4xl font-black text-white/20 pb-8">:</span>
+          <NumberBox value={timeLeft.minutes} label="Minutes" />
+          <span className="text-3xl md:text-4xl font-black text-white/20 pb-8">:</span>
+          <NumberBox value={timeLeft.seconds} label="Seconds" />
+        </div>
+      </div>
+    </Section>
+  );
+};
+
 const Hero = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 100]);
@@ -1159,14 +1227,16 @@ const GrowthStrategy = () => {
 const Team = () => {
   const team = [
     { name: "Sylvester Okafor", role: "The Founder & CEO", img: "/assets/img/person.jpg" },
-    { name: "Endwell Obinuchi Chinda", role: "Legal Director", img: "/assets/img/person7r.jpg" },
+    { name: "Beghemibebi Walter", role: "Legal Director", img: "/assets/img/person9.png" },
     { name: "Isaiah Omame", role: "Chief Technology Officer (CTO)", img: "/assets/img/person6.jpg" },
     { name: "Godwin Ngusen J.", role: "Engineering Manager", img: "/assets/img/person1.jpg" },
     { name: "Stephen O'Meara", role: "Advisory Board Chairman", img: "/assets/img/person2.jpg" },
+    { name: "Emeka Enwonwu", role: "Head of Cybersecurity", img: "/assets/img/person8.png" },
     { name: "Kaushik GD", role: "Data Commerce, AI & Sustainability Vice Chairman, Advisory Board", img: "/assets/img/person4.jpg" },
-    { name: "Vineeta Dixit", role: "Public Policy and Government Affairs, Spotify Advisor", img: "/assets/img/person5.jpg" },
+    { name: "Vineeta Dixit", role: "Public Policy and Government Affairs, Advisor", img: "/assets/img/person5.jpg" },
     { name: "Vanessa Haripersad", role: "Brand Management and Leadership", img: "/assets/img/editperson3.jpg" },
   ];
+
 
   return (
     <Section id="team" className="bg-white">
@@ -1181,7 +1251,7 @@ const Team = () => {
           variants={ANIMATION_VARIANTS.container}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "50px" }}
           className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10"
         >
           {team.map((member, i) => (
@@ -1538,6 +1608,28 @@ const Benefits = () => {
 
 
 
+const YouthSection = () => {
+  return (
+    <Section className="bg-white">
+      <div className="max-w-7xl mx-auto">
+        <Reveal className="text-center max-w-3xl mx-auto py-16">
+          <Badge>What 80% of Youths Don't Know</Badge>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
+            The Hidden Treasure in Public Procurement
+          </h2>
+          <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6 font-medium">
+            Public procurement accounts for approximately 70% of annual budget and expenditure in Nigeria and in Africa.
+            Yet over 80% of youths between ages 20-40 years of age do not partake in this fund.
+          </p>
+          <p className="text-slate-600 text-base md:text-xl leading-relaxed font-medium">
+            If you are interested in partaking from that large sum of money yearly; then Loud should be your number one platform, subscribe now!
+          </p>
+        </Reveal>
+      </div>
+    </Section>
+  );
+};
+
 const HowItWorks = () => {
 
   const [activeTab, setActiveTab] = useState<'contractors' | 'clients'>('clients');
@@ -1766,9 +1858,11 @@ const App = () => {
       <Navbar />
       <main>
         <Hero onOpenPreorder={() => setPreorderModalOpen(true)} />
+        <CountdownSection />
         <ValueProp />
         <Features />
         <Benefits />
+        <YouthSection />
         <HowItWorks />
         <Pricing onOpenPreorder={() => setPreorderModalOpen(true)} />
         <StoryAndVision />

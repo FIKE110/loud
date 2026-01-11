@@ -254,7 +254,7 @@ const Navbar = () => {
                 </Link>
               ))}
               {/* <div className="pt-10 flex flex-col gap-4">
-                <Button onClick={() => window.open('https://docs.google.com/forms/d/1iKlK5hbBVd7ShKb__WMHetwdke3iYpv_Jk2B_Tveo0M/edit', '_blank')}>
+                <Button onClick={() => window.open('https://docs.google.com/forms/d/1iKlK5hbBVd7ShKb__WMHetwdke3iYpv_Jk2B_Tveo0M/edit', '_blank')}> 
                   Pre-order Now
                 </Button>
                 <Button variant="whatsapp" onClick={() => window.open('https://whatsapp.com/channel/0029VbBPWHuLikg8UnhPvF1r', '_blank')}>
@@ -1311,7 +1311,7 @@ const PreorderVerificationModal = ({ isOpen, onClose }: { isOpen: boolean; onClo
       } else {
         setStatus('error');
       }
-    }
+    } 
   }, [isOpen]);
 
   return (

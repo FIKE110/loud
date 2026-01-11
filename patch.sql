@@ -48,6 +48,12 @@ CREATE TABLE IF NOT EXISTS user_preorders (
   CONSTRAINT unique_user_preorder UNIQUE (user_id)
 );
 
+CREATE TABLE subscription (
+        id serial PRIMARY KEY,
+        email text UNIQUE NOT NULL,
+        created_at timestamp NOT NULL DEFAULT now()
+   );
+
 INSERT INTO packages (code, name, description, launch_price)
 VALUES
 ('FREEMIUM', 'Free', 'Free', 0),

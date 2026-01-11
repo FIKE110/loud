@@ -39,6 +39,9 @@ CREATE TABLE user_preorders (
 
     CONSTRAINT unique_user_preorder UNIQUE (user_id)
 );
+
+
+
 -- 5️⃣ Insert initial package data
 INSERT INTO packages (code, name, description, launch_price) VALUES
 ('FREEMIUM', 'Free', 'Free', 0),
