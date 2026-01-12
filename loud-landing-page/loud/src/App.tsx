@@ -1010,7 +1010,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       highlight: false,
     },
     {
-      name: "UNLIMITED PROJECT ACCESS",
+      name: "LIFETIME PROJECT ACCESS",
       price: "3000",
       priceDetails: "Lifetime Subscription",
       description: "Gain unlimited access to all project-related features for a one-time payment.",
@@ -1027,7 +1027,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       highlight: true,
     },
     {
-      name: "UNLIMITED MARKETING ACCESS",
+      name: "LIFETIME MARKETING ACCESS",
       price: "3000",
       priceDetails: "Lifetime Subscription",
       description: "Gain unlimited access to all marketing-related features for a one-time payment.",
@@ -1257,7 +1257,7 @@ const Team = () => {
     { name: "Emeka Enwonwu", role: "Head of Cybersecurity", img: "/assets/img/person8.png" },
     { name: "Stephen O'Meara", role: "Advisory Board Chairman", img: "/assets/img/person2.jpg" },
     { name: "Kaushik GD", role: "Data Commerce, AI & Sustainability Vice Chairman, Advisory Board", img: "/assets/img/person4.jpg" },
-    { name: "Vineeta Dixit", role: "Public Policy and Government Affairs, Advisor", img: "/assets/img/person5.jpg" },
+    { name: "Vineeta Dixit", role: "Advisory Board Member", img: "/assets/img/person5.jpg" },
     { name: "Vanessa Haripersad", role: "Brand Management and Leadership", img: "/assets/img/editperson3.jpg" },
   ];
 
