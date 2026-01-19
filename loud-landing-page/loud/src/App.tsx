@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import {
   Menu, X, ArrowRight, Check, Zap, Globe,
   Shield, Users, TrendingUp,
@@ -196,13 +198,14 @@ const Navbar = () => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a
+            <HashLink
               key={link.name}
-              href={link.href}
+              to={link.href}
+              scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}
               className={`text-sm font-bold uppercase tracking-widest hover:text-[#01B2FE] transition-colors ${isScrolled ? 'text-slate-600' : 'text-slate-200'}`}
             >
               {link.name}
-            </a>
+            </HashLink>
           ))}
           <Button
             variant="primary"
@@ -239,14 +242,15 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col space-y-6">
               {navLinks.map((link) => (
-                <a
+                <HashLink
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
+                  scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                   onClick={() => setMobileMenuOpen(false)}
                   className="text-3xl font-black text-slate-900 border-b border-slate-100 pb-2"
                 >
                   {link.name}
-                </a>
+                </HashLink>
               ))}
               {/* <div className="pt-10 flex flex-col gap-4">
                 <Button onClick={() => window.open('https://docs.google.com/forms/d/1iKlK5hbBVd7ShKb__WMHetwdke3iYpv_Jk2B_Tveo0M/edit', '_blank')}>
@@ -440,7 +444,7 @@ const VideoSection = () => {
             <video
               src="/assets/video/loud-video.mp4"
               controls
-              className="w-full h-full object-cover"
+              className="w-full h-full md:w-[50%] md:m-auto  object-cover"
             />
           </div>
         </Reveal>
@@ -1378,9 +1382,9 @@ const Footer = () => {
           <div className="hidden md:block">
             <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Quick Links</h4>
             <ul className="space-y-4 text-sm font-bold">
-              <li><a href="#story" className="hover:text-[#01B2FE] transition-colors">Our Story</a></li>
-              <li><a href="#pricing" className="hover:text-[#01B2FE] transition-colors">Pre-order</a></li>
-              <li><a href="#growth" className="hover:text-[#01B2FE] transition-colors">Roadmap</a></li>
+              <li><HashLink to="#story" scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'start' })} className="hover:text-[#01B2FE] transition-colors">Our Story</HashLink></li>
+              <li><HashLink to="#pricing" scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'start' })} className="hover:text-[#01B2FE] transition-colors">Pre-order</HashLink></li>
+              <li><HashLink to="#growth" scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'start' })} className="hover:text-[#01B2FE] transition-colors">Roadmap</HashLink></li>
             </ul>
           </div>
 
@@ -1401,9 +1405,14 @@ const Footer = () => {
             </form>
           </div>
         </div>
-        <div className="border-t border-white/5 pt-10 text-center text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">
-          <p>© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
-          <p className="mt-2">This product is protected by U.S. patents. For more information, please visit <a href="/patents" className="underline">loudproductlimited.com/patents</a>.</p>
+        <div className="border-t border-white/5 pt-10 text-center text-xs text-slate-500">
+          <div className="flex justify-center gap-6 mb-4">
+            <a href="/terms" className="hover:text-[#01B2FE] transition-colors">Terms of Service</a>
+            <a href="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use Policy</a>
+            <a href="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</a>
+          </div>
+          <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
+          <p className="mt-2 text-xs">This product is protected by U.S. patents. For more information, please visit <a href="/patents" className="underline">loudproductlimited.com/patents</a>.</p>
         </div>
       </div>
     </footer>
