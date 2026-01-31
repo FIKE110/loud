@@ -207,13 +207,6 @@ const Navbar = () => {
               {link.name}
             </HashLink>
           ))}
-          <Button
-            variant="primary"
-            className="px-6 py-2.5 text-xs uppercase tracking-widest"
-            onClick={() => window.open('https://docs.google.com/forms/d/1iKlK5hbBVd7ShKb__WMHetwdke3iYpv_Jk2B_Tveo0M/edit', '_blank')}
-          >
-            Join Beta
-          </Button>
         </div>
 
         {/* Mobile Toggle */}
@@ -330,6 +323,152 @@ const CountdownSection = () => {
           <NumberBox value={timeLeft.minutes} label="Minutes" />
           <span className="text-3xl md:text-4xl font-black text-white/20 pb-8">:</span>
           <NumberBox value={timeLeft.seconds} label="Seconds" />
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+const LoudStory = () => {
+  return (
+    <Section className="bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 md:gap-20 items-center">
+          <Reveal>
+            <Badge>Our Purpose</Badge>
+            <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">LOUD! Connects the African Diaspora</h2>
+            <p className="text-slate-600 text-base md:text-xl leading-relaxed mb-6 font-medium">
+              LOUD! is the connection between African Diasporas, Contractors, Engineers, Builders, and Content Creators who aim for 10x faster higher earnings.
+            </p>
+            <div className="bg-[#e6f7ff] border-l-4 border-[#01B2FE] p-6 rounded-r-xl mb-6">
+              <p className="text-slate-700 text-base leading-relaxed">
+                <span className="font-black text-[#01B2FE]">The Story:</span> Two years ago, Kayode, who lives in the United States, sent $100k to his family in Nigeria to build his dream home. But to date, only 40% of the project was shabbily done because he trusted family to deliver his project.
+              </p>
+            </div>
+            <p className="text-slate-600 text-base md:text-xl leading-relaxed font-medium mb-6">
+              This is the situation of over 50 million African Diasporas, and yearly millions of dollars are lost.
+            </p>
+            <p className="text-slate-600 text-base md:text-xl leading-relaxed font-medium">
+              <span className="font-black text-[#01B2FE]">LOUD!</span> has developed a Smart Construction Management solution to enable users to have value for their money and complete their projects 80% faster while staying within budget.
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <div className="w-12 h-12 bg-[#01B2FE] rounded-full flex items-center justify-center">
+                  <Check className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm font-black text-slate-900">Go-to Platform</p>
+                  <p className="text-xs text-slate-500">For maximum project value</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, filter: 'blur(10px)' }}
+            whileInView={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.8 }}
+            whileHover={{ scale: 1.02 }}
+            className="bg-gradient-to-br from-[#00567a] to-[#003d57] rounded-[2rem] md:rounded-[3rem] p-8 md:p-14 text-white relative overflow-hidden shadow-2xl"
+          >
+            <div className="absolute top-0 right-0 w-48 md:w-80 h-48 md:h-80 bg-[#01B2FE]/30 rounded-full blur-[60px] md:blur-[100px] -translate-y-1/2 translate-x-1/3" />
+            <div className="relative z-10">
+              <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                  <p className="text-4xl font-black text-[#01B2FE] mb-2">50M+</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-300">African Diasporas</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                  <p className="text-4xl font-black text-[#01B2FE] mb-2">80%</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-300">Faster Completion</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                  <p className="text-4xl font-black text-[#01B2FE] mb-2">$100k</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-300">Avg Project Value</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+                  <p className="text-4xl font-black text-[#01B2FE] mb-2">10x</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-300">Higher Earnings</p>
+                </div>
+              </div>
+              <h3 className="text-xl md:text-2xl font-black mb-4 leading-tight">Maximum Value for Your Projects</h3>
+              <p className="text-sm md:text-base text-[#e6f7ff] leading-relaxed">
+                The LOUD! platform has become the go-to platform for diasporas who want maximum value for their projects.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        <div className="mt-20 grid md:grid-cols-3 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#01B2FE] to-[#0080c0] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 group-hover:border-[#01B2FE]/50 transition-all duration-300">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="/assets/img/added1.png"
+                  alt="Connecting Diasporas and Contractors"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6">
+                <h4 className="text-lg font-black text-slate-900 mb-2">Connecting Communities</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">Bridging the gap between African Diasporas and trusted professionals for seamless project execution.</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#01B2FE] to-[#0080c0] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 group-hover:border-[#01B2FE]/50 transition-all duration-300">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="/assets/img/added2.png"
+                  alt="Smart Construction Management"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6">
+                <h4 className="text-lg font-black text-slate-900 mb-2">Smart Management</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">Advanced construction management tools ensuring projects stay on track and within budget.</p>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-[#01B2FE] to-[#0080c0] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
+            <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 group-hover:border-[#01B2FE]/50 transition-all duration-300">
+              <div className="aspect-[4/3] overflow-hidden">
+                <img
+                  src="/assets/img/added3.png"
+                  alt="Trusted Project Delivery"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6">
+                <h4 className="text-lg font-black text-slate-900 mb-2">Trusted Delivery</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">Verified contractors and transparent processes guaranteeing maximum value for every investment.</p>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </Section>
@@ -455,7 +594,7 @@ const VideoSection = () => {
 
 const ValueProp = () => {
   const stats = [
-    { label: "Faster Procurement", value: "95%", desc: "Automating systems for speed" },
+    { label: "Faster Procurement", value: "95%", desc: "Automating systems for Trust" },
     { label: "Cost Savings", value: "80%", desc: "Drastic reduction in overhead" },
     { label: "Better Pricing", value: "30%", desc: "Lower than global competitors" },
   ];
@@ -882,7 +1021,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
 
 const Features = () => {
   const features = [
-    { icon: Zap, title: "Speed", desc: "Top-notch performance for connectivity." },
+    { icon: Zap, title: "Trust", desc: "Top-notch performance for connectivity." },
     { icon: TrendingUp, title: "Efficiency", desc: "Maximize output with smart automation." },
     { icon: Users, title: "Community", desc: "Tagging systems for closer networking." },
     { icon: Lock, title: "Safety", desc: "Crafted security for younger generations." },
@@ -955,7 +1094,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       features: [
         "Pre-launch pricing",
         "Only 100 slots available",
-        "Available till January 20, 2026",
+        "Available till February 28, 2026",
         "Subscribers will get 50% and pay $3.4/month; from January 1, 2027",
         "Discover 100% private projects on platform",
         "Instant verification from launch day",
@@ -972,7 +1111,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       features: [
         "Pre-launch pricing",
         "Only 100 slots available",
-        "Available till January 20, 2026",
+        "Available till February 28, 2026",
         "Subscribers will get 50% and pay $15/month; from January 1, 2027",
         "Discover 100% all projects on platform",
         "Instant verification from launch day",
@@ -988,7 +1127,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       description: "Save 50% subscription amount for Life. Only 100 slots available.",
       features: [
         "Creator Economy Payout",
-        "Available till January 20, 2026",
+        "Available till February 28, 2026",
         "Subscribers will get 50% and pay $1.75/month; from January 1, 2027",
         "Monetization from the third month after launch",
         "Instant verification from launch day",
@@ -1004,7 +1143,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       description: "Save 50% subscription amount for Life. Only 100 slots available.",
       features: [
         "Partnership Program",
-        "Available till January 20, 2026",
+        "Available till February 28, 2026",
         "Subscribers will get 50% and pay $31.5/month; from January 1, 2027",
         "Receive divined",
         "Instant verification from launch day",
@@ -1021,7 +1160,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       features: [
         "Pre-launch pricing",
         "Only 100 slots available",
-        "Available till January 20, 2026",
+        "Available till February 28, 2026",
         "Discover 100% all projects on platform",
         "Instant verification from launch day",
         "Bid submission, reminders and search optimization, AI project assist and contract award",
@@ -1038,7 +1177,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       features: [
         "Pre-launch pricing",
         "Only 100 slots available",
-        "Available till January 20, 2026",
+        "Available till February 28, 2026",
         "Access to all premium marketing features",
         "Instant verification from launch day",
         "Direct community access and support",
@@ -1934,6 +2073,7 @@ const App = () => {
         <Hero onOpenPreorder={() => setPreorderModalOpen(true)} />
         <VideoSection />
         <CountdownSection />
+        <LoudStory />
         <ValueProp />
         <Features />
         <Benefits />
