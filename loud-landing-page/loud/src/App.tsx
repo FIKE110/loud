@@ -43,7 +43,7 @@ import 'swiper/css/pagination';
 import 'swiper/css';
 
 /**
- * ANIMATION CONFIGURATION
+ * ANIMATION CONFIGU
  */
 const ANIMATION_VARIANTS = {
   container: {
