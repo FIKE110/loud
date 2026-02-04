@@ -262,7 +262,7 @@ const Navbar = () => {
 };
 
 const CountdownSection = () => {
-  const targetDate = new Date("2026-02-02T00:00:00");
+  const targetDate = new Date("2026-02-28T00:00:00");
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -311,7 +311,7 @@ const CountdownSection = () => {
       <div className="max-w-7xl mx-auto text-center">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tighter text-white">Countdown to Launch</h2>
-          <p className="text-lg text-slate-400 font-medium mb-10">February 2, 2026</p>
+          <p className="text-lg text-slate-400 font-medium mb-10">February 28, 2026</p>
         </Reveal>
         <div
           className="flex items-center justify-center gap-2 md:gap-4"
@@ -410,11 +410,11 @@ const LoudStory = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#01B2FE] to-[#0080c0] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
             <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 group-hover:border-[#01B2FE]/50 transition-all duration-300">
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="aspect-[3/2] overflow-hidden">
                 <img
                   src="/assets/img/added1.png"
                   alt="Connecting Diasporas and Contractors"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-6">
@@ -433,11 +433,11 @@ const LoudStory = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#01B2FE] to-[#0080c0] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
             <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 group-hover:border-[#01B2FE]/50 transition-all duration-300">
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="aspect-[3/2] overflow-hidden">
                 <img
                   src="/assets/img/added2.png"
                   alt="Smart Construction Management"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-6">
@@ -456,11 +456,11 @@ const LoudStory = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-[#01B2FE] to-[#0080c0] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl" />
             <div className="relative bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 group-hover:border-[#01B2FE]/50 transition-all duration-300">
-              <div className="aspect-[4/3] overflow-hidden">
+              <div className="aspect-[3/2] overflow-hidden">
                 <img
                   src="/assets/img/added3.png"
                   alt="Trusted Project Delivery"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-6">
@@ -622,7 +622,7 @@ const Partners = () => {
               <img
                 src={partner.logo}
                 alt={partner.name}
-                className="h-16 md:h-20 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+                className="h-16 md:h-24 w-auto object-contain opacity-100 hover:opacity-100 transition-opacity duration-300"
               />
             </motion.div>
           ))}
