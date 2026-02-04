@@ -592,6 +592,46 @@ const VideoSection = () => {
   );
 };
 
+const Partners = () => {
+  const partners = [
+    { name: "Corbon", logo: "/assets/img/corbon.webp" }
+  ];
+
+  return (
+    <Section className="bg-slate-50 py-12">
+      <div className="max-w-7xl mx-auto px-4">
+        <Reveal className="text-center mb-10">
+          <h2 className="text-xl md:text-2xl font-black text-slate-400 uppercase tracking-[0.3em]">
+            Our Partners
+          </h2>
+        </Reveal>
+        <motion.div
+          variants={ANIMATION_VARIANTS.container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="flex flex-wrap justify-center items-center gap-8 md:gap-16"
+        >
+          {partners.map((partner, i) => (
+            <motion.div
+              key={i}
+              variants={ANIMATION_VARIANTS.item}
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              className="flex items-center justify-center"
+            >
+              <img
+                src={partner.logo}
+                alt={partner.name}
+                className="h-16 md:h-20 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </Section>
+  );
+};
+
 const ValueProp = () => {
   const stats = [
     { label: "Faster Procurement", value: "95%", desc: "Automating systems for Trust" },
@@ -2072,6 +2112,7 @@ const App = () => {
       <main>
         <Hero onOpenPreorder={() => setPreorderModalOpen(true)} />
         <VideoSection />
+        <Partners />
         <CountdownSection />
         <LoudStory />
         <ValueProp />
