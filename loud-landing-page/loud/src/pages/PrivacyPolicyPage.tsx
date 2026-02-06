@@ -11,9 +11,9 @@ const PrivacyPolicyPage: FC = () => {
 
         <div className="prose prose-lg text-gray-700">
           <p className="mb-6">
-            <strong>Effective Date:</strong> ………………………..
+            <strong>Effective Date:</strong> 01/02/2026
             <br />
-            <strong>Last Updated:</strong> …………………………
+            <strong>Last Updated:</strong> 01/02/2026
           </p>
 
           <div className="space-y-8">
@@ -334,10 +334,10 @@ const PrivacyPolicyPage: FC = () => {
               </p>
               <ul className="list-none space-y-2 mt-4">
                 <li>
-                  <strong>Email:</strong> ……………………………………………………….
+                  <strong>Email:</strong> support@loudproductslimited.com
                 </li>
                 <li>
-                  <strong>Address:</strong> ……………………………………………………
+                  <strong>Address:</strong> 76, Rumudumaya Air Port Road, Port Harcourt, Nigeria
                 </li>
               </ul>
             </section>

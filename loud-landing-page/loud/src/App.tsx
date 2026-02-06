@@ -436,13 +436,13 @@ const LoudStory = () => {
               <div className="aspect-[3/2] overflow-hidden">
                 <img
                   src="/assets/img/added2.png"
-                  alt="Smart Construction Management"
+                  alt="Birthday Connections"
                   className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-6">
-                <h4 className="text-lg font-black text-slate-900 mb-2">Smart Management</h4>
-                <p className="text-sm text-slate-600 leading-relaxed">Advanced construction management tools ensuring projects stay on track and within budget.</p>
+                <h4 className="text-lg font-black text-slate-900 mb-2">Birthday Connections</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">Celebrate your birthday in a special way by connecting with your birthdaymates closest to you. An awesome feature you don't want to miss.</p>
               </div>
             </div>
           </motion.div>
@@ -459,13 +459,13 @@ const LoudStory = () => {
               <div className="aspect-[3/2] overflow-hidden">
                 <img
                   src="/assets/img/added3.png"
-                  alt="Trusted Project Delivery"
+                  alt="Community Focus"
                   className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="p-6">
-                <h4 className="text-lg font-black text-slate-900 mb-2">Trusted Delivery</h4>
-                <p className="text-sm text-slate-600 leading-relaxed">Verified contractors and transparent processes guaranteeing maximum value for every investment.</p>
+                <h4 className="text-lg font-black text-slate-900 mb-2">Community Focus</h4>
+                <p className="text-sm text-slate-600 leading-relaxed">Community is our focus and giving birthday celebrants a better experience is our pride. Subscribe to get started.</p>
               </div>
             </div>
           </motion.div>
