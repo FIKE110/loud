@@ -594,8 +594,7 @@ const VideoSection = () => {
 
 const Partners = () => {
   const partners = [
-    { name: "Corbon", logo: "/assets/img/corbon.webp" },
-    { name: "DUN & BRADSTREET", logo: "/assets/img/duns_partner.jpg" }
+    { name: "Corbon", logo: "/assets/img/corbon.webp" }
   ];
 
   return (
@@ -1592,6 +1591,7 @@ const Footer = () => {
             <a href="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</a>
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
+          <p className="mt-2 text-xs text-slate-500">DUNS Registered</p>
           <p className="mt-2 text-xs">This product is protected by U.S. patents. For more information, please visit <a href="/patents" className="underline">loudproductlimited.com/patents</a>.</p>
         </div>
       </div>
