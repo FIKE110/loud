@@ -1439,7 +1439,6 @@ const Team = () => {
     // { name: "Godwin Ngusen J.", role: "Engineering Manager", img: "/assets/img/person1.jpg" },
     { name: "Emeka Enwonwu", role: "Head of Cybersecurity", img: "/assets/img/person8.png" },
     { name: "Stephen O'Meara", role: "Advisory Board Chairman", img: "/assets/img/person2.jpg" },
-    { name: "Kaushik GD", role: "Data Commerce, AI & Sustainability Vice Chairman, Advisory Board", img: "/assets/img/person4.jpg" },
     { name: "Vineeta Dixit", role: "Advisory Board Member", img: "/assets/img/person5.jpg" },
     { name: "Vanessa Haripersad", role: "Brand Management and Leadership", img: "/assets/img/editperson3.jpg" },
   ];
