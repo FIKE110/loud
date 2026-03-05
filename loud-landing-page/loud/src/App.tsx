@@ -262,7 +262,7 @@ const Navbar = () => {
 };
 
 const CountdownSection = () => {
-  const targetDate = new Date("2026-02-28T00:00:00");
+  const targetDate = new Date("2026-03-21T00:00:00");
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -311,7 +311,7 @@ const CountdownSection = () => {
       <div className="max-w-7xl mx-auto text-center">
         <Reveal>
           <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tighter text-white">Countdown to Launch</h2>
-          <p className="text-lg text-slate-400 font-medium mb-10">February 28, 2026</p>
+          <p className="text-lg text-slate-400 font-medium mb-10">March 21, 2026</p>
         </Reveal>
         <div
           className="flex items-center justify-center gap-2 md:gap-4"
@@ -594,7 +594,8 @@ const VideoSection = () => {
 
 const Partners = () => {
   const partners = [
-    { name: "Corbon", logo: "/assets/img/corbon.webp" }
+    { name: "Corbon", logo: "/assets/img/corbon.webp" },
+    { name: "DUN & BRADSTREET", logo: "/assets/img/duns_partner.jpg" }
   ];
 
   return (
@@ -1134,7 +1135,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       features: [
         "Pre-launch pricing",
         "Only 100 slots available",
-        "Available till February 28, 2026",
+        "Available till March 21, 2026",
         "Subscribers will get 50% and pay $3.4/month; from January 1, 2027",
         "Discover 100% private projects on platform",
         "Instant verification from launch day",
@@ -1151,7 +1152,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       features: [
         "Pre-launch pricing",
         "Only 100 slots available",
-        "Available till February 28, 2026",
+        "Available till March 21, 2026",
         "Subscribers will get 50% and pay $15/month; from January 1, 2027",
         "Discover 100% all projects on platform",
         "Instant verification from launch day",
@@ -1167,7 +1168,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       description: "Save 50% subscription amount for Life. Only 100 slots available.",
       features: [
         "Creator Economy Payout",
-        "Available till February 28, 2026",
+        "Available till March 21, 2026",
         "Subscribers will get 50% and pay $1.75/month; from January 1, 2027",
         "Monetization from the third month after launch",
         "Instant verification from launch day",
@@ -1183,7 +1184,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       description: "Save 50% subscription amount for Life. Only 100 slots available.",
       features: [
         "Partnership Program",
-        "Available till February 28, 2026",
+        "Available till March 21, 2026",
         "Subscribers will get 50% and pay $31.5/month; from January 1, 2027",
         "Receive divined",
         "Instant verification from launch day",
@@ -1200,7 +1201,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       features: [
         "Pre-launch pricing",
         "Only 100 slots available",
-        "Available till February 28, 2026",
+        "Available till March 21, 2026",
         "Discover 100% all projects on platform",
         "Instant verification from launch day",
         "Bid submission, reminders and search optimization, AI project assist and contract award",
@@ -1217,7 +1218,7 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
       features: [
         "Pre-launch pricing",
         "Only 100 slots available",
-        "Available till February 28, 2026",
+        "Available till March 21, 2026",
         "Access to all premium marketing features",
         "Instant verification from launch day",
         "Direct community access and support",
