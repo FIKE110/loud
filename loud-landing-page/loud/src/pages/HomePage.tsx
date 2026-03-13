@@ -1163,7 +1163,7 @@ const Team = () => {
     { name: "Isaiah Omame", role: "Chief Technology Officer (CTO)", img: "/assets/img/person6.jpg" },
     { name: "Godwin Ngusen J.", role: "Engineering Manager", img: "/assets/img/person1.jpg" },
     { name: "Stephen O'Meara", role: "Advisory Board Chairman", img: "/assets/img/person2.jpg" },
-    { name: "Kaushik GD", role: "Data commerce, AI & Sustainability Vice Chairman, Advisory Board", img: "/assets/img/person4.jpg" },
+    { name: "Alejandro Dayan", role: "Strategic CFO", img: "/assets/img/person10.png" },
     { name: "Vineeta Dixit", role: "Public Policy and Government Affairs, Spotify Advisor", img: "/assets/img/person5.jpg" },
     { name: "Vanessa Haripersad", role: "Brand management and Leadership", img: "/assets/img/person3.jpg" },
   ];
