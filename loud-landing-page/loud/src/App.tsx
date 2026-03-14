@@ -1436,11 +1436,11 @@ const Team = () => {
     { name: "Sylvester Okafor", role: "The Founder & CEO", img: "/assets/img/person.jpg" },
     { name: "Beghemibebi Walter", role: "Legal Director", img: "/assets/img/person9.png" },
     { name: "Isaiah Omame", role: "Chief Technology Officer (CTO)", img: "/assets/img/person6.jpg" },
-     { name: "Alejandro Dayan", role: "Strategic CFO", img: "/assets/img/person10.png" },
     // { name: "Godwin Ngusen J.", role: "Engineering Manager", img: "/assets/img/person1.jpg" },
     { name: "Emeka Enwonwu", role: "Head of Cybersecurity", img: "/assets/img/person8.png" },
     { name: "Stephen O'Meara", role: "Advisory Board Chairman", img: "/assets/img/person2.jpg" },
     { name: "Vineeta Dixit", role: "Advisory Board Member", img: "/assets/img/person5.jpg" },
+     { name: "Alejandro Dayan", role: "Strategic CFO", img: "/assets/img/person10.png" },
     { name: "Vanessa Haripersad", role: "Brand Management and Leadership", img: "/assets/img/editperson3.jpg" },
   ];
 
