@@ -7,10 +7,16 @@
     "dev": "vite",
     "build": " vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "remotion:studio": "remotion studio",
+    "remotion:render": "remotion render LoudProductVideo",
+    "remotion:preview": "remotion preview"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
+    "@remotion/cli": "4.0.443",
+    "@remotion/google-fonts": "^4.0.443",
+    "@remotion/transitions": "^4.0.443",
     "@tailwindcss/vite": "^4.1.18",
     "framer-motion": "^12.23.26",
     "lucide-react": "^0.562.0",
@@ -19,9 +25,11 @@
     "react-paystack": "^6.0.0",
     "react-router-dom": "^7.12.0",
     "react-router-hash-link": "^2.4.3",
+    "remotion": "4.0.443",
     "sonner": "^2.0.7",
     "swiper": "^12.0.3",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "zod": "4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

@@ -177,6 +177,7 @@ const Navbar = () => {
     { name: 'Benefits', href: '#benefits' },
     { name: 'How it works', href: '#how-it-works' },
     { name: 'Pre-order', href: '#pricing' },
+    { name: 'FAQ', href: '#faq' },
     { name: 'Growth', href: '#growth' },
     { name: 'Team', href: '#team' },
   ];
@@ -1106,6 +1107,52 @@ const Features = () => {
   );
 };
 
+const FAQ = () => {
+  const faqs = [
+    { q: "Who can use LOUD!?", a: "Anyone who meets the minimum legal age in their country (typically 18+) can create an account." },
+    { q: "Is LOUD! free to use?", a: "Yes. LOUD! offers a free version with optional premium features." },
+    { q: "How do creators make money?", a: "Creators can earn through gifts, subscriptions, promotions, and platform-based reward programs." },
+    { q: "Can I withdraw my earnings?", a: "Yes, once you meet minimum payout thresholds and complete verification." },
+    { q: "How does LOUD! protect my data?", a: "Using industry-standard encryption, secure servers, and access controls." },
+    { q: "Is LOUD! available globally?", a: "LOUD! is launching from Nigeria with a global expansion plan." },
+    { q: "How can I contact support?", a: "Email support@loudproductslimited.com or report directly in the app." },
+  ];
+
+  return (
+    <Section id="faq" className="bg-white">
+      <div className="max-w-3xl mx-auto px-4">
+        <Reveal className="text-center mb-12">
+          <Badge>FAQ</Badge>
+          <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">Frequently Asked <span className="text-[#01B2FE]">Questions.</span></h2>
+        </Reveal>
+        <div className="space-y-4">
+          {faqs.map((faq, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="p-6 rounded-2xl bg-slate-50 border border-slate-100"
+            >
+              <h3 className="text-lg font-black text-slate-900 mb-2">{faq.q}</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">{faq.a}</p>
+            </motion.div>
+          ))}
+        </div>
+        <Reveal delay={0.2}>
+          <div className="text-center mt-10">
+            <a href="/faq" className="inline-flex items-center gap-2 px-8 py-4 bg-[#01B2FE] text-white rounded-full font-bold hover:bg-[#00a0e6] transition-colors shadow-lg shadow-[#01B2FE]/30">
+              View All Questions
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </Reveal>
+      </div>
+    </Section>
+  );
+};
+
 
 
 
@@ -1587,8 +1634,14 @@ const Footer = () => {
         <div className="border-t border-white/5 pt-10 text-center text-xs text-slate-500">
           <div className="flex justify-center gap-6 mb-4">
             <a href="/terms" className="hover:text-[#01B2FE] transition-colors">Terms of Service</a>
-            <a href="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use Policy</a>
+            <a href="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use</a>
             <a href="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</a>
+            <a href="/faq" className="hover:text-[#01B2FE] transition-colors">FAQ</a>
+            <a href="/child-privacy" className="hover:text-[#01B2FE] transition-colors">Child Privacy</a>
+            <a href="/revenue-participation" className="hover:text-[#01B2FE] transition-colors">Revenue</a>
+            <a href="/gifting-policy" className="hover:text-[#01B2FE] transition-colors">Gifting</a>
+            <a href="/referral-incentive" className="hover:text-[#01B2FE] transition-colors">Referral</a>
+            <a href="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly</a>
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
           <p className="mt-2 text-xs text-slate-500">DUNS Registered</p>
@@ -2183,6 +2236,7 @@ const App = () => {
         <Pricing onOpenPreorder={() => setPreorderModalOpen(true)} />
         <StoryAndVision />
         <GrowthStrategy />
+        <FAQ />
         <Team />
         <PreorderVerificationModal isOpen={isPreorderModalVerificationOpen} onClose={() => setPreorderModalVerificationOpen(false)} />
         <PreorderModal isOpen={isPreorderModalOpen} onClose={() => setPreorderModalOpen(false)} />
