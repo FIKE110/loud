@@ -1632,16 +1632,12 @@ const Footer = () => {
           </div>
         </div>
         <div className="border-t border-white/5 pt-10 text-center text-xs text-slate-500">
-          <div className="flex justify-center gap-6 mb-4">
-            <a href="/terms" className="hover:text-[#01B2FE] transition-colors">Terms of Service</a>
-            <a href="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use</a>
-            <a href="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</a>
-            <a href="/faq" className="hover:text-[#01B2FE] transition-colors">FAQ</a>
-            <a href="/child-privacy" className="hover:text-[#01B2FE] transition-colors">Child Privacy</a>
-            <a href="/revenue-participation" className="hover:text-[#01B2FE] transition-colors">Revenue</a>
-            <a href="/gifting-policy" className="hover:text-[#01B2FE] transition-colors">Gifting</a>
-            <a href="/referral-incentive" className="hover:text-[#01B2FE] transition-colors">Referral</a>
-            <a href="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly</a>
+          <div className="flex justify-center gap-6 mb-4 flex-wrap">
+            <Link to="/terms" className="hover:text-[#01B2FE] transition-colors">Terms of Service</Link>
+            <Link to="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</Link>
+            <Link to="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use</Link>
+            <Link to="/faq" className="hover:text-[#01B2FE] transition-colors">FAQ</Link>
+            <Link to="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link>
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
           <p className="mt-2 text-xs text-slate-500">DUNS Registered</p>

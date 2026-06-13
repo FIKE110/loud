@@ -119,6 +119,7 @@ const Footer = () => (
         <Link to="/privacy" className="text-sm hover:text-[#01B2FE] transition-colors">Privacy Policy</Link>
         <Link to="/acceptable-use-policy" className="text-sm hover:text-[#01B2FE] transition-colors">Acceptable Use</Link>
         <Link to="/faq" className="text-sm hover:text-[#01B2FE] transition-colors">FAQ</Link>
+        <Link to="/quarterly-ambassador" className="text-sm hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link>
       </div>
       <div className="text-center text-xs text-slate-600">
         <p className="font-black uppercase tracking-[0.4em]">© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
@@ -197,8 +198,8 @@ const QuarterlyAmbassadorPage: FC = () => {
           <ul className="list-disc list-inside space-y-2">
             <li><strong>Frequency:</strong> Rewards are calculated and paid quarterly, within 14 days after the end of each Quarter.</li>
             <li><strong>Method:</strong> Payment via bank wire transfer to the Ambassador's provided account.</li>
-            <li><strong>No Stacking:</strong> If the Ambassador achieves 900 sign-ups, they receive ₦5,000,000 (not the sum of lower tiers).</li>
-            <li><strong>Taxes:</strong> The Ambassador is responsible for all applicable taxes. The Company shall issue a tax invoice where required by law.</li>
+            <li><strong>No Stacking:</strong> If the creator achieves 900 sign-ups, they receive ₦5,000,000 (not the sum of lower tiers).</li>
+            <li><strong>Taxes:</strong> The Creator is responsible for all applicable taxes. The Company shall issue a tax invoice (Form equivalent) where required by law.</li>
           </ul>
         </div>
       ),
@@ -208,15 +209,15 @@ const QuarterlyAmbassadorPage: FC = () => {
       answer: (
         <div className="space-y-4">
           <p className="mb-4"><strong>Zero Tolerance Policy:</strong></p>
-          <p className="mb-4">The Ambassador/Creator shall not:</p>
+          <p className="mb-4">The Creator shall not:</p>
           <ul className="list-disc list-inside space-y-2">
             <li>Create fake accounts, use bots, or incentivize sign-ups via spam.</li>
             <li>Engage in "click farms" or pay third parties to generate sign-ups without genuine user consent.</li>
           </ul>
           <p className="mt-4"><strong>Verification:</strong> The Company reserves the right to audit any referral at any time. If fraud is detected:</p>
           <ul className="list-disc list-inside space-y-2">
-            <li>The Ambassador forfeits all pending and future rewards.</li>
-            <li>The Ambassador may be banned from the Platform.</li>
+            <li>The Creator forfeits all pending and future rewards.</li>
+            <li>The Creator may be banned from the Platform.</li>
             <li>The Company reserves the right to seek legal damages for reputational harm.</li>
           </ul>
         </div>
@@ -226,8 +227,8 @@ const QuarterlyAmbassadorPage: FC = () => {
       question: "5. INTELLECTUAL PROPERTY & CONTENT",
       answer: (
         <div>
-          <p className="mb-4">The Ambassador grants the Company a non-exclusive, royalty-free license to use the Ambassador's name, image, and referral content for marketing purposes related to this campaign.</p>
-          <p>The Ambassador shall not use the Company's logo for personal gain or business without prior written approval.</p>
+          <p className="mb-4">The Creator grants the Company a non-exclusive, royalty-free license to use the Creator's name, image, and referral content for marketing purposes related to this campaign only for the period the creator is subscribed to the creator program, where the creator opts out the company may not use the creators details.</p>
+          <p>The Creator shall not use the Company's logo for personal gain or business without prior written approval.</p>
         </div>
       ),
     },
@@ -245,7 +246,7 @@ const QuarterlyAmbassadorPage: FC = () => {
       answer: (
         <div className="space-y-4">
           <ul className="list-disc list-inside space-y-2">
-            <li><strong>Governing Law:</strong> This Agreement shall be governed by the laws of Nigeria or Delaware, USA.</li>
+            <li><strong>Governing Law:</strong> This Agreement shall be governed by the laws of Nigeria or Delaware, USA</li>
             <li><strong>Dispute Resolution:</strong> Any dispute arising out of this Agreement shall first be resolved through informal negotiation. If unresolved within 30 days, the dispute shall be referred to binding arbitration in City/Country in accordance with the rules of the Lagos Multi-Door Courthouse or American Arbitration Association.</li>
           </ul>
         </div>
@@ -265,7 +266,7 @@ const QuarterlyAmbassadorPage: FC = () => {
       answer: (
         <div>
           <p className="mb-4">This Agreement constitutes the entire understanding between the parties and supersedes all prior discussions. Amendments must be in writing and signed by both parties.</p>
-          <p className="mt-4 text-sm text-slate-400">Effective Date: 10/04/2026</p>
+          <p className="mt-4 text-sm text-slate-400">Effective Date: 01/04/2026</p>
         </div>
       ),
     },
@@ -301,7 +302,7 @@ const QuarterlyAmbassadorPage: FC = () => {
             <p className="text-slate-400 text-base md:text-lg">
               Influencer & Brand Ambassador Agreement
             </p>
-            <p className="text-slate-500 text-sm mt-2">Effective Date: 10/04/2026</p>
+            <p className="text-slate-500 text-sm mt-2">Effective Date: 01/04/2026</p>
           </div>
 
           <div className="space-y-3">

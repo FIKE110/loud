@@ -114,10 +114,11 @@ const Navbar = () => {
 const Footer = () => (
   <footer className="bg-slate-950 text-slate-400 pt-16 pb-10 border-t border-white/5">
     <div className="max-w-7xl mx-auto px-4 sm:px-6">
-      <div className="flex justify-center gap-6 mb-8">
+      <div className="flex justify-center gap-6 mb-8 flex-wrap">
         <Link to="/terms" className="text-sm hover:text-[#01B2FE] transition-colors">Terms of Service</Link>
         <Link to="/privacy" className="text-sm hover:text-[#01B2FE] transition-colors">Privacy Policy</Link>
-        <Link to="/acceptable-use-policy" className="text-sm hover:text-[#01B2FE] transition-colors">Acceptable Use Policy</Link>
+        <Link to="/acceptable-use-policy" className="text-sm hover:text-[#01B2FE] transition-colors">Acceptable Use</Link>
+        <Link to="/quarterly-ambassador" className="text-sm hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link>
       </div>
       <div className="text-center text-xs text-slate-600">
         <p className="font-black uppercase tracking-[0.4em]">© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>

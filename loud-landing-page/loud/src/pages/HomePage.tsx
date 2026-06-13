@@ -1233,15 +1233,27 @@ const Footer = () => (
           </ul>
         </div>
 
-        <div className="hidden md:block">
-          <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Quick Links</h4>
+        <div className="text-center md:text-left">
+          <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Legal</h4>
           <ul className="space-y-4 text-sm font-bold">
-            <li><Link to="/about" className="hover:text-[#01B2FE] transition-colors">About Us</Link></li>
-            <li><a href="#pricing" className="hover:text-[#01B2FE] transition-colors">Pre-order</a></li>
-            <li><a href="#growth" className="hover:text-[#01B2FE] transition-colors">Roadmap</a></li>
-            <li><Link to="/patents" className="hover:text-[#01B2FE] transition-colors">Patents</Link></li>
+            <li><Link to="/terms" className="hover:text-[#01B2FE] transition-colors">Terms of Service</Link></li>
+            <li><Link to="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use</Link></li>
+            <li><Link to="/faq" className="hover:text-[#01B2FE] transition-colors">FAQ</Link></li>
+            <li><Link to="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link></li>
           </ul>
         </div>
+
+          <div className="hidden md:block">
+            <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Quick Links</h4>
+            <ul className="space-y-4 text-sm font-bold">
+              <li><Link to="/about" className="hover:text-[#01B2FE] transition-colors">About Us</Link></li>
+              <li><a href="#pricing" className="hover:text-[#01B2FE] transition-colors">Pre-order</a></li>
+              <li><a href="#growth" className="hover:text-[#01B2FE] transition-colors">Roadmap</a></li>
+              <li><Link to="/patents" className="hover:text-[#01B2FE] transition-colors">Patents</Link></li>
+              <li><Link to="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link></li>
+            </ul>
+          </div>
 
         <div className="text-center md:text-left">
           <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Get Involved</h4>
