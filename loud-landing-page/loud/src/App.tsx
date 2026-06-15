@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import {
@@ -263,14 +263,8 @@ const Navbar = () => {
 };
 
 const CountdownSection = () => {
-  const targetDate = new Date("2026-03-21T00:00:00");
-
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  });
+  const targetDate = useMemo(() => new Date("2026-03-21T00:00:00"), []);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -289,7 +283,6 @@ const CountdownSection = () => {
 
     const timer = setInterval(calculateTimeLeft, 1000);
     
-    // Initial call to set time immediately
     calculateTimeLeft();
 
     return () => clearInterval(timer);
@@ -1637,11 +1630,12 @@ const Footer = () => {
             <Link to="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</Link>
             <Link to="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use</Link>
             <Link to="/faq" className="hover:text-[#01B2FE] transition-colors">FAQ</Link>
+            <Link to="/creator-content-policy" className="hover:text-[#01B2FE] transition-colors">Creator Content Policy</Link>
             <Link to="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link>
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>
           <p className="mt-2 text-xs text-slate-500">DUNS Registered</p>
-          <p className="mt-2 text-xs">This product is protected by U.S. patents. For more information, please visit <a href="/patents" className="underline">loudproductlimited.com/patents</a>.</p>
+          <p className="mt-2 text-xs">This product is protected by U.S. patents. For more information, please visit <Link to="/patents" className="underline">loudproductlimited.com/patents</Link>.</p>
         </div>
       </div>
     </footer>

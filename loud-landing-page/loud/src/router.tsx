@@ -10,6 +10,7 @@ import RevenueParticipationPage from "./pages/RevenueParticipationPage";
 import GiftingPolicyPage from "./pages/GiftingPolicyPage";
 import ReferralIncentivePage from "./pages/ReferralIncentivePage";
 import QuarterlyAmbassadorPage from "./pages/QuarterlyAmbassadorPage";
+import CreatorContentPage from "./pages/CreatorContentPage";
 import PatentsPage from "./pages/PatentsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -17,58 +18,63 @@ import NotFoundPage from "./pages/NotFoundPage";
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    Component: App,
+    ErrorBoundary: NotFoundPage,
   },
   {
     path: "/payment-success",
-    element: <App />,
+    Component: App,
   },
   {
     path: "/about",
-    element: <AboutPage />,
+    Component: AboutPage,
   },
   {
     path: "/terms",
-    element: <TermsPage />,
+    Component: TermsPage,
   },
   {
     path: "/patents",
-    element: <PatentsPage />,
+    Component: PatentsPage,
   },
   {
     path: "/acceptable-use-policy",
-    element: <AcceptableUsePolicyPage />,
+    Component: AcceptableUsePolicyPage,
   },
   {
     path: "/privacy",
-    element: <PrivacyPolicyPage />,
+    Component: PrivacyPolicyPage,
   },
   {
     path: "/faq",
-    element: <FAQPage />,
+    Component: FAQPage,
   },
   {
     path: "/child-privacy",
-    element: <ChildPrivacyPage />,
+    Component: ChildPrivacyPage,
   },
   {
     path: "/revenue-participation",
-    element: <RevenueParticipationPage />,
+    Component: RevenueParticipationPage,
   },
   {
     path: "/gifting-policy",
-    element: <GiftingPolicyPage />,
+    Component: GiftingPolicyPage,
   },
   {
     path: "/referral-incentive",
-    element: <ReferralIncentivePage />,
+    Component: ReferralIncentivePage,
   },
   {
     path: "/quarterly-ambassador",
-    element: <QuarterlyAmbassadorPage />,
+    Component: QuarterlyAmbassadorPage,
+  },
+  {
+    path: "/creator-content-policy",
+    Component: CreatorContentPage,
   },
   {
     path: "*",
-    element: <NotFoundPage />,
+    Component: NotFoundPage,
   },
 ]);
