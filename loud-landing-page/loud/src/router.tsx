@@ -11,6 +11,8 @@ import GiftingPolicyPage from "./pages/GiftingPolicyPage";
 import ReferralIncentivePage from "./pages/ReferralIncentivePage";
 import QuarterlyAmbassadorPage from "./pages/QuarterlyAmbassadorPage";
 import CreatorContentPage from "./pages/CreatorContentPage";
+import USDataCompliancePage from "./pages/USDataCompliancePage";
+import HealthContentPolicyPage from "./pages/HealthContentPolicyPage";
 import PatentsPage from "./pages/PatentsPage";
 import NotFoundPage from "./pages/NotFoundPage";
 
@@ -40,6 +42,10 @@ export const router = createBrowserRouter([
   {
     path: "/acceptable-use-policy",
     Component: AcceptableUsePolicyPage,
+  },
+  {
+    path: "/health-content-policy",
+    Component: HealthContentPolicyPage,
   },
   {
     path: "/privacy",
@@ -72,6 +78,10 @@ export const router = createBrowserRouter([
   {
     path: "/creator-content-policy",
     Component: CreatorContentPage,
+  },
+  {
+    path: "/us-data-compliance",
+    Component: USDataCompliancePage,
   },
   {
     path: "*",

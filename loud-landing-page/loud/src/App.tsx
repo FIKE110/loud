@@ -1629,7 +1629,9 @@ const Footer = () => {
             <Link to="/terms" className="hover:text-[#01B2FE] transition-colors">Terms of Service</Link>
             <Link to="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</Link>
             <Link to="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use</Link>
+            <Link to="/health-content-policy" className="hover:text-[#01B2FE] transition-colors">Health Content Policy</Link>
             <Link to="/faq" className="hover:text-[#01B2FE] transition-colors">FAQ</Link>
+            <Link to="/us-data-compliance" className="hover:text-[#01B2FE] transition-colors">US Data Compliance</Link>
             <Link to="/creator-content-policy" className="hover:text-[#01B2FE] transition-colors">Creator Content Policy</Link>
             <Link to="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link>
           </div>
