@@ -1620,7 +1620,7 @@ const Footer = () => {
               <Button variant="primary" className="w-full text-xs uppercase tracking-widest" disabled={loading}>
                 {loading ? <Loader2 className="animate-spin" /> : 'Subscribe'}
               </Button>
-              <p className="text-xs text-slate-500 mt-2">By subscribing, you agree to our Terms of Use.</p>
+              <p className="text-xs text-slate-500 mt-2">By subscribing, you agree to our <Link to="/eula" className="hover:text-[#01B2FE] transition-colors">EULA</Link>.</p>
             </form>
           </div>
         </div>
@@ -1628,6 +1628,7 @@ const Footer = () => {
           <div className="flex justify-center gap-6 mb-4 flex-wrap">
             <Link to="/terms" className="hover:text-[#01B2FE] transition-colors">Terms of Service</Link>
             <Link to="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</Link>
+            <Link to="/eula" className="hover:text-[#01B2FE] transition-colors">EULA</Link>
             <Link to="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use</Link>
             <Link to="/health-content-policy" className="hover:text-[#01B2FE] transition-colors">Health Content Policy</Link>
             <Link to="/faq" className="hover:text-[#01B2FE] transition-colors">FAQ</Link>
