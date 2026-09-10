@@ -1620,7 +1620,7 @@ const Footer = () => {
               <Button variant="primary" className="w-full text-xs uppercase tracking-widest" disabled={loading}>
                 {loading ? <Loader2 className="animate-spin" /> : 'Subscribe'}
               </Button>
-              <p className="text-xs text-slate-500 mt-2">By subscribing, you agree to our <Link to="/eula" className="hover:text-[#01B2FE] transition-colors">EULA</Link>.</p>
+              <p className="text-xs text-slate-500 mt-2">By subscribing, you agree to our Terms of Use.</p>
             </form>
           </div>
         </div>
