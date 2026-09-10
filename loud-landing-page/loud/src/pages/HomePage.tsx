@@ -1238,6 +1238,7 @@ const Footer = () => (
           <ul className="space-y-4 text-sm font-bold">
             <li><Link to="/terms" className="hover:text-[#01B2FE] transition-colors">Terms of Service</Link></li>
             <li><Link to="/privacy" className="hover:text-[#01B2FE] transition-colors">Privacy Policy</Link></li>
+            <li><Link to="/eula" className="hover:text-[#01B2FE] transition-colors">EULA</Link></li>
             <li><Link to="/acceptable-use-policy" className="hover:text-[#01B2FE] transition-colors">Acceptable Use</Link></li>
             <li><Link to="/faq" className="hover:text-[#01B2FE] transition-colors">FAQ</Link></li>
             <li><Link to="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link></li>

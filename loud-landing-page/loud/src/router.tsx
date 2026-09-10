@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import AboutPage from "./pages/AboutPage";
 import TermsPage from "./pages/TermsPage";
+import EULAPage from "./pages/EULAPage";
 import AcceptableUsePolicyPage from "./pages/AcceptableUsePolicyPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import FAQPage from "./pages/FAQPage";
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
   {
     path: "/terms",
     Component: TermsPage,
+  },
+  {
+    path: "/eula",
+    Component: EULAPage,
   },
   {
     path: "/patents",

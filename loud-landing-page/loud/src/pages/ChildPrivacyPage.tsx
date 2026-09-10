@@ -117,6 +117,7 @@ const Footer = () => (
       <div className="flex justify-center gap-6 mb-8 flex-wrap">
         <Link to="/terms" className="text-sm hover:text-[#01B2FE] transition-colors">Terms of Service</Link>
         <Link to="/privacy" className="text-sm hover:text-[#01B2FE] transition-colors">Privacy Policy</Link>
+        <Link to="/eula" className="text-sm hover:text-[#01B2FE] transition-colors">EULA</Link>
         <Link to="/acceptable-use-policy" className="text-sm hover:text-[#01B2FE] transition-colors">Acceptable Use</Link>
         <Link to="/health-content-policy" className="text-sm hover:text-[#01B2FE] transition-colors">Health Content Policy</Link>
         <Link to="/faq" className="text-sm hover:text-[#01B2FE] transition-colors">FAQ</Link>
