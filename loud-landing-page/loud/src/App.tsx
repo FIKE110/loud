@@ -191,6 +191,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2 group">
+          <img src={isScrolled ? "/new_logo_bg.png" : "/new_logo_white.png"} alt="LOUD!" className="h-9 md:h-10 w-9 md:w-10 object-cover rounded-full" />
           <span className={`text-2xl font-black tracking-tighter text-[#01B2FE]`}>
             LOUD<span className={`${isScrolled ? 'text-slate-900' : 'text-white'}`}>!</span>
           </span>
@@ -229,7 +230,10 @@ const Navbar = () => {
             className="fixed inset-0 h-screen w-full bg-white z-[110] p-6 flex flex-col md:hidden"
           >
             <div className="flex justify-between items-center mb-12">
-              <span className="text-2xl font-black">LOUD<span className="text-[#01B2FE]">!</span></span>
+              <div className="flex items-center gap-2">
+                <img src="/new_logo_white.png" alt="LOUD!" className="h-9 w-9 object-cover rounded-full" />
+                <span className="text-2xl font-black">LOUD<span className="text-[#01B2FE]">!</span></span>
+              </div>
               <button onClick={() => setMobileMenuOpen(false)} className="p-2 bg-slate-100 rounded-full">
                 <X />
               </button>
@@ -1499,7 +1503,7 @@ const Team = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "50px" }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-10"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-10 justify-items-center"
         >
           {team.map((member, i) => (
             <motion.div variants={ANIMATION_VARIANTS.item} key={i} className="group relative">
@@ -1566,6 +1570,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-8 text-white">
+              <img src="/new_logo_white.png" alt="LOUD!" className="h-10 w-10 object-cover rounded-full" />
               <span className="text-2xl font-black text-[#01B2FE]">LOUD<span className="text-white">!</span></span>
             </div>
             <p className="text-sm md:text-base leading-relaxed text-slate-400 mb-8 max-w-xs mx-auto md:mx-0 font-medium">
