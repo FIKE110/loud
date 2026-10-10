@@ -522,14 +522,14 @@ const Hero = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white text-slate-900 hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base group"
             >
-              <svg className="mr-2 w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+              <img src="/assets/img/download/google-play.svg" alt="Google Play" className="mr-2.5 h-[1.2em] w-auto" />
               Google Play
             </a>
             <span
               className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white/10 text-white border border-white/20 backdrop-blur-sm text-sm md:text-base cursor-not-allowed"
             >
-              <svg className="mr-2 w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,16.97 2.93,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.67C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.46 12.36,4.26 13,3.5Z"/></svg>
-              App Store — Coming Soon
+              <img src="/assets/img/download/apple.svg" alt="App Store" className="mr-2.5 h-[1.2em] w-auto" />
+              App Store Coming soon
             </span>
             <Button
               variant="whatsapp"
@@ -1485,8 +1485,8 @@ const GrowthStrategy = () => {
 const Team = () => {
   const team = [
     { name: "Sylvester Okafor", role: "The Founder & CEO", img: "/assets/img/person.jpg" },
-    { name: "Beghemibebi Walter", role: "Legal Director", img: "/assets/img/person9.png" },
     { name: "Isaiah Omame", role: "Chief Technology Officer (CTO)", img: "/assets/img/person6.jpg" },
+    { name: "Beghemibebi Walter", role: "Legal Director", img: "/assets/img/person9.png" },
     // { name: "Godwin Ngusen J.", role: "Engineering Manager", img: "/assets/img/person1.jpg" },
     //{ name: "Emeka Enwonwu", role: "Head of Cybersecurity", img: "/assets/img/person8.png" },
    // { name: "Stephen O'Meara", role: "Advisory Board Chairman", img: "/assets/img/person2.jpg" },
@@ -1533,41 +1533,6 @@ const Team = () => {
 
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const handleSubscription = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email.includes('@')) {
-      toast.error("A valid Email is required");
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await fetch(`${backend_url}/api/subscription`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong');
-      }
-
-      toast.success(data.message);
-      setEmail('');
-    } catch (err: any) {
-      toast.error(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <footer className="bg-slate-950 text-slate-400 pt-20 pb-10 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -1616,20 +1581,22 @@ const Footer = () => {
           </div>
 
           <div className="text-center md:text-left">
-            <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Get Involved</h4>
-            <form onSubmit={handleSubscription} className="flex flex-col gap-3">
-              <input
-                type="email"
-                placeholder="Email for updates"
-                className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 w-full text-sm outline-none focus:ring-2 focus:ring-[#01B2FE] transition-all text-white font-medium"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <Button variant="primary" className="w-full text-xs uppercase tracking-widest" disabled={loading}>
-                {loading ? <Loader2 className="animate-spin" /> : 'Subscribe'}
-              </Button>
-              <p className="text-xs text-slate-500 mt-2">By subscribing, you agree to our Terms of Use.</p>
-            </form>
+            <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Download</h4>
+            <div className="flex flex-col gap-3">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.loudproductslimited.loud&pcampaignid=web_share"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white text-slate-900 hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm group"
+              >
+                <img src="/assets/img/download/google-play.svg" alt="Google Play" className="mr-2.5 h-[1.2em] w-auto" />
+                Google Play
+              </a>
+              <span className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white/10 text-white border border-white/20 backdrop-blur-sm text-sm cursor-not-allowed">
+                <img src="/assets/img/download/apple.svg" alt="App Store" className="mr-2.5 h-[1.2em] w-auto" />
+                App Store Coming soon
+              </span>
+            </div>
           </div>
         </div>
         <div className="border-t border-white/5 pt-10 text-center text-xs text-slate-500">
@@ -2172,59 +2139,25 @@ const App = () => {
 <Section className="bg-slate-900">
   <div className="max-w-xl mx-auto text-center">
     <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
-      Stay Updated
+      Download LOUD!
     </h2>
     <p className="text-slate-400 text-base md:text-lg leading-relaxed mb-10 font-medium">
-      Subscribe to our newsletter to get the latest news and updates.
+      Get the app to start creating, connecting and going live.
     </p>
-    <div className="text-center md:text-left">
-      <h4 className="text-white font-black text-xs uppercase tracking-[0.3em] mb-8">Get Involved</h4>
-      <form onSubmit={async (e) => {
-        e.preventDefault();
-        const email = (e.target as any).email.value;
-        if (!email.includes('@')) {
-          toast.error("A valid Email is required");
-          return;
-        }
-        const button = (e.target as any).querySelector('button');
-        if (button) {
-          button.disabled = true;
-          button.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
-        }
-        try {
-          const response = await fetch(`${backend_url}/api/subscription`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email }),
-          });
-          const data = await response.json();
-          if (!response.ok) {
-            throw new Error(data.message || 'Something went wrong');
-          }
-          toast.success(data.message);
-          (e.target as any).email.value = '';
-        } catch (err: any) {
-          toast.error(err.message);
-        } finally {
-          if (button) {
-            button.disabled = false;
-            button.innerHTML = 'Subscribe';
-          }
-        }
-      }} className="flex flex-col gap-3">
-        <input
-          type="email"
-          name="email"
-          placeholder="Email for updates"
-          className="bg-white/5 border border-white/10 rounded-xl px-5 py-3 w-full text-sm outline-none focus:ring-2 focus:ring-[#01B2FE] transition-all text-white font-medium"
-        />
-        <Button variant="primary" className="w-full text-xs uppercase tracking-widest">
-          Subscribe
-        </Button>
-        <p className="text-xs text-slate-500 mt-2">By subscribing, you agree to our Terms of Use.</p>
-      </form>
+    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href="https://play.google.com/store/apps/details?id=com.loudproductslimited.loud&pcampaignid=web_share"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white text-slate-900 hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base group"
+      >
+        <img src="/assets/img/download/google-play.svg" alt="Google Play" className="mr-2.5 h-[1.2em] w-auto" />
+        Google Play
+      </a>
+      <span className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white/10 text-white border border-white/20 backdrop-blur-sm text-sm md:text-base cursor-not-allowed">
+        <img src="/assets/img/download/apple.svg" alt="App Store" className="mr-2.5 h-[1.2em] w-auto" />
+        App Store Coming soon
+      </span>
     </div>
   </div>
 </Section>
