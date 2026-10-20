@@ -15,6 +15,7 @@ import CreatorContentPage from "./pages/CreatorContentPage";
 import USDataCompliancePage from "./pages/USDataCompliancePage";
 import CopyrightReligiousContentPage from "./pages/CopyrightReligiousContentPage";
 import GoLivePolicyPage from "./pages/GoLivePolicyPage";
+import CoinPolicyPage from "./pages/CoinPolicyPage";
 import HealthContentPolicyPage from "./pages/HealthContentPolicyPage";
 import PatentsPage from "./pages/PatentsPage";
 import NotFoundPage from "./pages/NotFoundPage";
@@ -97,6 +98,10 @@ export const router = createBrowserRouter([
   {
     path: "/golive-policy",
     Component: GoLivePolicyPage,
+  },
+  {
+    path: "/coin-policy",
+    Component: CoinPolicyPage,
   },
   {
     path: "*",

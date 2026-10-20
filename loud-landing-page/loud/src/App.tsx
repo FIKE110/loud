@@ -104,9 +104,11 @@ const LoadingScreen = () => (
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="flex flex-col items-center"
     >
-      <div className="w-16 h-16 bg-[#01B2FE] rounded-2xl flex items-center justify-center text-white font-black text-3xl shadow-2xl shadow-[#01B2FE]/50 mb-6">
-        L
-      </div>
+      <img
+        src="/assets/img/new_logo_white.png"
+        alt="LOUD!"
+        className="h-24 w-auto object-contain mb-6"
+      />
       <motion.div
         className="h-1 w-32 bg-slate-800 rounded-full overflow-hidden"
       >
@@ -514,19 +516,19 @@ const Hero = () => {
 
           <motion.div
             variants={ANIMATION_VARIANTS.item}
-            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            className="flex flex-col sm:flex-row sm:flex-wrap gap-4 justify-center lg:justify-start"
           >
             <a
               href="https://play.google.com/store/apps/details?id=com.loudproductslimited.loud&pcampaignid=web_share"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white text-slate-900 hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base group"
+              className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white text-slate-900 hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base group w-full sm:w-auto whitespace-nowrap"
             >
               <img src="/assets/img/download/google-play.svg" alt="Google Play" className="mr-2.5 h-[1.2em] w-auto" />
               Google Play
             </a>
             <span
-              className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white/10 text-white border border-white/20 backdrop-blur-sm text-sm md:text-base cursor-not-allowed"
+              className="inline-flex items-center justify-center px-6 py-3.5 rounded-full font-bold bg-white/10 text-white border border-white/20 backdrop-blur-sm text-sm md:text-base cursor-not-allowed w-full sm:w-auto whitespace-nowrap"
             >
               <img src="/assets/img/download/apple.svg" alt="App Store" className="mr-2.5 h-[1.2em] w-auto" />
               App Store Coming soon
@@ -1611,6 +1613,7 @@ const Footer = () => {
             <Link to="/creator-content-policy" className="hover:text-[#01B2FE] transition-colors">Creator Content Policy</Link>
             <Link to="/copyright-religious-content-policy" className="hover:text-[#01B2FE] transition-colors">Copyright & Religious Content</Link>
             <Link to="/golive-policy" className="hover:text-[#01B2FE] transition-colors">GoLive Policy</Link>
+            <Link to="/coin-policy" className="hover:text-[#01B2FE] transition-colors">Coin Policy</Link>
             <Link to="/quarterly-ambassador" className="hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link>
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600">© 2026 LOUD PRODUCT LIMITED. ALL RIGHTS RESERVED.</p>

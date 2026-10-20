@@ -126,6 +126,7 @@ const Footer = () => (
         <Link to="/creator-content-policy" className="text-sm hover:text-[#01B2FE] transition-colors">Creator Content Policy</Link>
         <Link to="/copyright-religious-content-policy" className="text-sm hover:text-[#01B2FE] transition-colors">Copyright & Religious Content</Link>
         <Link to="/golive-policy" className="text-sm hover:text-[#01B2FE] transition-colors">GoLive Policy</Link>
+        <Link to="/coin-policy" className="text-sm hover:text-[#01B2FE] transition-colors">Coin Policy</Link>
         <Link to="/quarterly-ambassador" className="text-sm hover:text-[#01B2FE] transition-colors">Quarterly Ambassador Program</Link>
       </div>
       <div className="text-center text-xs text-slate-600">
