@@ -176,6 +176,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', href: '#hero' },
     { name: 'Features', href: '#features' },
+    { name: 'Pre-order', href: '#pricing' },
     { name: 'Benefits', href: '#benefits' },
     { name: 'How it works', href: '#how-it-works' },
     { name: 'FAQ', href: '#faq' },
@@ -769,7 +770,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
     first_name: '',
     last_name: '',
     gender: 'rather not say',
-    package_code: 'FREEMIUM'
+    package_code: 'CONTRACTOR_1_YEAR'
   });
 
   const [isNewUser, setIsNewUser] = useState(true);
@@ -780,7 +781,7 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
       setStep('email');
       setIsNewUser(true);
       setEmail('');
-      setFormData({ first_name: '', last_name: '', gender: 'rather not say', package_code: 'FREEMIUM' });
+      setFormData({ first_name: '', last_name: '', gender: 'rather not say', package_code: 'CONTRACTOR_1_YEAR' });
       setLoading(false);
     }
   }, [isOpen]);
@@ -965,24 +966,12 @@ const PreorderModal = ({ isOpen, onClose, currentStep }: { isOpen: boolean; onCl
                   <div className="pt-2">
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">Select Package</label>
                     <div className="grid grid-cols-1 gap-3 h-64 overflow-y-auto">
-                      {[ 
-                        { code: 'FREEMIUM', name: 'Freemium ($0)' },
-                        { code: 'OFFER_1', name: 'Offer 1 ($80.40)' },
-                        { code: 'OFFER_2', name: 'Offer 2 ($360.00)' },
-                        { code: 'OFFER_3', name: 'Offer 3 ($42.00)' },
-                        {
-                          code: 'OFFER_4',
-                          name: 'Offer 4 ($754.80)'
-                        },
-                        {
-                          code: 'UNLIMITED_PROJECT_ACCESS',
-                          name: 'Unlimited Project Access ($3000)'
-                        },
-                        {
-                          code: 'UNLIMITED_MARKETING_ACCESS',
-                          name: 'Unlimited Marketing Access ($3000)'
-                        },
-                        { code: 'CREATORS_PACK', name: "Creator's Pack ($2000)" }
+                      {[
+                        { code: 'LIFETIME_CONTRACTOR', name: 'Lifetime Contractor ($804.00)' },
+                        { code: 'CONTRACTOR_1_YEAR', name: 'Contractor 1 Year ($80.40)' },
+                        { code: 'PER_BID_CONTRACTOR', name: 'Per Bid Contractor ($14.90/bid)' },
+                        { code: 'TRUST_ENFORCER_LIFETIME', name: 'Trust Enforcer Lifetime ($278.40)' },
+                        { code: 'TRUST_ENFORCER_1_YEAR', name: 'Trust Enforcer 1 Year ($27.84)' },
                       ].map((pkg) => (
                         <label
                           key={pkg.code}
@@ -1165,132 +1154,73 @@ const FAQ = () => {
 const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
   const plans = [
     {
-      name: "FREEMIUM",
-      price: "0",
-      priceDetails: "Lifetime Free Access",
-      description: "Connect with family and friends, share updates, and more.",
+      name: "LIFETIME CONTRACTOR",
+      price: "804",
+      priceDetails: "One-time lifetime subscription",
+      description: "One-time payment. Unlimited contract-bidding access for life.",
       features: [
-        "Connect with family and friends",
-        "Share update/posts",
-        "Comment and share gifts with friends",
-        "Experience global birthday mate event on feed",
-        "Monetize @500 followers and earn 50% UGC revenue",
+        "Who viewed your profile",
+        "Verification mark",
+        "Free live streaming",
+        "Unlimited project access and bid submission",
+        "No renewals, ever",
       ],
       buttonVariant: "priceOutline",
       highlight: false,
     },
     {
-      name: "OFFER 1",
+      name: "CONTRACTOR 1 YEAR",
       price: "80.40",
-      priceDetails: "$6.7/12mnth $6.7/M after launch",
-      description: "Save 50% subscription amount for Life. 100% money back if you didn’t find your proposed value.",
+      priceDetails: "US$80.40 per year",
+      description: "Full contractor access on the platform for 12 months.",
       features: [
-        "Pre-launch pricing",
-        "Only 100 slots available",
-        "Available till March 21, 2026",
-        "Subscribers will get 50% and pay $3.4/month; from January 1, 2027",
-        "Discover 100% private projects on platform",
-        "Instant verification from launch day",
-        "Bid submission, reminders and contract award",
+        "Who viewed your profile",
+        "Verification mark",
+        "Free live streaming",
+        "Project access and bid submission for 1 year",
       ],
       buttonVariant: "primary",
       highlight: true,
     },
     {
-      name: "OFFER 2",
-      price: "360",
-      priceDetails: "$360/12mnth $30/m after launch",
-      description: "Save 50% subscription amount for Life. 100% money back if you didn’t find your proposed value.",
+      name: "PER BID CONTRACTOR",
+      price: "14.90",
+      priceDetails: "US$14.90 per bid submission",
+      description: "Pay only when you bid. One bid submission per purchase.",
       features: [
-        "Pre-launch pricing",
-        "Only 100 slots available",
-        "Available till March 21, 2026",
-        "Subscribers will get 50% and pay $15/month; from January 1, 2027",
-        "Discover 100% all projects on platform",
-        "Instant verification from launch day",
-        "Bid submission, reminders and search optimization, AI project assist and contract award",
+        "Who viewed your profile",
+        "Verification mark",
+        "Free live streaming",
+        "One bid submission per purchase",
       ],
       buttonVariant: "priceOutline",
       highlight: false,
     },
     {
-      name: "OFFER 3",
-      price: "42",
-      priceDetails: "$3.5/12mnths $3.5/M after launch",
-      description: "Save 50% subscription amount for Life. Only 100 slots available.",
+      name: "TRUST ENFORCER LIFETIME",
+      price: "278.40",
+      priceDetails: "US$278.40 one-time · 20% discount applied",
+      description: "One-time payment. Lifetime access for site monitoring and reporting.",
       features: [
-        "Creator Economy Payout",
-        "Available till March 21, 2026",
-        "Subscribers will get 50% and pay $1.75/month; from January 1, 2027",
-        "Monetization from the third month after launch",
-        "Instant verification from launch day",
-        "Direct community access and support",
+        "Who viewed your profile",
+        "Verification mark",
+        "Monitor project sites from planning to handover and report with pictures and notes",
       ],
       buttonVariant: "primary",
       highlight: true,
     },
     {
-      name: "OFFER 4",
-      price: "754.80",
-      priceDetails: "$62.9/12mths $62.9/M after launch",
-      description: "Save 50% subscription amount for Life. Only 100 slots available.",
+      name: "TRUST ENFORCER 1 YEAR",
+      price: "27.84",
+      priceDetails: "US$27.84 per year · 20% discount applied",
+      description: "Full trust enforcer access on the platform for 12 months.",
       features: [
-        "Partnership Program",
-        "Available till March 21, 2026",
-        "Subscribers will get 50% and pay $31.5/month; from January 1, 2027",
-        "Receive divined",
-        "Instant verification from launch day",
-        "Access to all premium features",
+        "Who viewed your profile",
+        "Verification mark",
+        "Monitor project sites from planning to handover and report with pictures and notes",
       ],
       buttonVariant: "priceOutline",
       highlight: false,
-    },
-    {
-      name: "LIFETIME PROJECT ACCESS",
-      price: "3000",
-      priceDetails: "Lifetime Subscription",
-      description: "Gain unlimited access to all project-related features for a one-time payment.",
-      features: [
-        "Pre-launch pricing",
-        "Only 100 slots available",
-        "Available till March 21, 2026",
-        "Discover 100% all projects on platform",
-        "Instant verification from launch day",
-        "Bid submission, reminders and search optimization, AI project assist and contract award",
-        "Unlimited project access and bid submission"
-      ],
-      buttonVariant: "primary",
-      highlight: true,
-    },
-    {
-      name: "LIFETIME MARKETING ACCESS",
-      price: "3000",
-      priceDetails: "Lifetime Subscription",
-      description: "Gain unlimited access to all marketing-related features for a one-time payment.",
-      features: [
-        "Pre-launch pricing",
-        "Only 100 slots available",
-        "Available till March 21, 2026",
-        "Access to all premium marketing features",
-        "Instant verification from launch day",
-        "Direct community access and support",
-        "Monetization from the third month after launch"
-      ],
-      buttonVariant: "priceOutline",
-      highlight: false,
-    },
-    {
-      name: "Creator's Pack",
-      price: "2000",
-      priceDetails: "Lifetime Subscription",
-      description: "A special offer for creators to maximize their earnings and visibility.",
-      features: [
-        "Earn 80% of content generated revenue",
-        "Unlimited link use and optimization",
-        "Verification"
-      ],
-      buttonVariant: "primary",
-      highlight: true,
     },
   ];
 
@@ -1308,6 +1238,29 @@ const Pricing = ({ onOpenPreorder }: { onOpenPreorder: () => void }) => {
           <p className="text-slate-500 text-sm md:text-lg mb-10 max-w-xl mx-auto px-4 font-medium">
             Lock in early-bird rates and priority access. Official launch coming soon.
           </p>
+        </Reveal>
+
+        <Reveal delay={0.15}>
+          <div className="grid md:grid-cols-2 gap-6 mb-14">
+            <div className="flex gap-4 p-6 rounded-2xl border border-slate-200 bg-slate-50">
+              <Briefcase className="w-8 h-8 text-[#01B2FE] flex-shrink-0" />
+              <div>
+                <h3 className="font-black text-slate-900 mb-1">Who is a Contractor?</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  A Contractor is a professional or an entity who signs up on the LOUD! platform for the purpose of delivering quality services on projects, from planning and construction to handover.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-4 p-6 rounded-2xl border border-slate-200 bg-slate-50">
+              <Shield className="w-8 h-8 text-[#01B2FE] flex-shrink-0" />
+              <div>
+                <h3 className="font-black text-slate-900 mb-1">Who is a Trust Enforcer?</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  A Trust Enforcer is a professional or an entity who signs up on the LOUD! platform for the purpose of monitoring progress on project sites — from planning and construction to handover — and reporting with pictures and notes.
+                </p>
+              </div>
+            </div>
+          </div>
         </Reveal>
 
 
@@ -2112,6 +2065,8 @@ const Offering = () => {
 const App = () => {
 
   const [loading, setLoading] = useState(true);
+  const [isPreorderModalOpen, setPreorderModalOpen] = useState(false);
+  const [isPreorderModalVerificationOpen, setPreorderModalVerificationOpen] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -2133,12 +2088,13 @@ const App = () => {
         <Hero />
         <VideoSection />
         <Partners />
-        <CountdownSection />
+        {/* <CountdownSection /> */}
         <LoudStory />
         <ValueProp />
         <Features />
         <Benefits />
         <YouthSection />
+        <Pricing onOpenPreorder={() => setPreorderModalOpen(true)} />
 <Section className="bg-slate-900">
   <div className="max-w-xl mx-auto text-center">
     <h2 className="text-3xl md:text-5xl font-black text-white mb-6 tracking-tight">
@@ -2169,6 +2125,8 @@ const App = () => {
         <GrowthStrategy />
         <FAQ />
         <Team />
+        <PreorderVerificationModal isOpen={isPreorderModalVerificationOpen} onClose={() => setPreorderModalVerificationOpen(false)} />
+        <PreorderModal isOpen={isPreorderModalOpen} onClose={() => setPreorderModalOpen(false)} />
         <Toaster />
       </main>
       <Footer />
